@@ -1,0 +1,21 @@
+{
+  "title": "Complete MIDC Industrial Services",
+  "services": [
+    {
+      "name": "MIDC NOC Process", 
+      "description": "Complete MIDC approvals, tri-party consent, water & MSEB connections"
+    },
+    {
+      "name": "DPR & CMA Reports",
+      "description": "Detailed project reports for bank funding and government subsidies"
+    },
+    {
+      "name": "Term Loans & CC",
+      "description": "Working capital, project finance, cash credit from banks"
+    },
+    {
+      "name": "MSME Registration",
+      "description": "Udyam registration, licenses, statutory compliance"
+    }
+  ]
+}
