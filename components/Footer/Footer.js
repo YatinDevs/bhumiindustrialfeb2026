@@ -349,7 +349,7 @@ export default function Footer() {
         </div>
 
         {/* Newsletter Section - UPDATED */}
-        <div className="mb-12 p-4 md:p-8 bg-white/5 rounded-2xl backdrop-blur-sm">
+        {/* <div className="mb-12 p-4 md:p-8 bg-white/5 rounded-2xl backdrop-blur-sm">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
               <h4 className="text-xl font-bold mb-2">
@@ -373,7 +373,7 @@ export default function Footer() {
           <p className="text-xs text-[#b3cce6] mt-3 text-center md:text-left">
             We respect your privacy. Unsubscribe at any time.
           </p>
-        </div>
+        </div> */}
 
         {/* Bottom Bar - UPDATED */}
         <div className="pt-8 border-t border-white/10">
