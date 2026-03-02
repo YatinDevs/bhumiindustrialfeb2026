@@ -116,7 +116,7 @@ export default function Footer() {
             </div>
             
             <p className="text-[#d9e6f2] font-secondary text-sm leading-relaxed">
-              26+ years of excellence in industrial & financial consulting. Your
+              27+ years of excellence in industrial & financial consulting. Your
               trusted partner for MIDC services, MSME Udyam registration, and
               project finance across Maharashtra.
             </p>

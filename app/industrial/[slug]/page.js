@@ -75,7 +75,7 @@ export async function generateMetadata({ params }) {
 const serviceContent = {
   "industrial-project-planning": {
     intro:
-      "End-to-end industrial project planning from site identification to production start. 26+ years of helping Nashik manufacturers set up successfully in Ambad, Satpur, and Sinnar MIDC.",
+      "End-to-end industrial project planning from site identification to production start. 27+ years of helping Nashik manufacturers set up successfully in Ambad, Satpur, and Sinnar MIDC.",
     features: [
       "Site Feasibility Analysis",
       "MIDC Plot Shortlisting",
@@ -263,7 +263,7 @@ const serviceContent = {
       {
         question: "Is a project report mandatory for MIDC allotment in Nashik?",
         answer:
-          "Yes, a detailed project report is mandatory for MIDC plot allotment application. The report quality significantly impacts the allotment committee's decision. Our 26+ years of experience ensures MIDC-compliant reports.",
+          "Yes, a detailed project report is mandatory for MIDC plot allotment application. The report quality significantly impacts the allotment committee's decision. Our 27+ years of experience ensures MIDC-compliant reports.",
       },
     ],
   },
@@ -385,7 +385,7 @@ const serviceContent = {
   },
   "all-midc-work": {
     intro:
-      "One-stop solution for all MIDC work in Nashik. Whatever your MIDC requirement — from first allotment to final closure — we handle it with 26+ years of MIDC expertise.",
+      "One-stop solution for all MIDC work in Nashik. Whatever your MIDC requirement — from first allotment to final closure — we handle it with 27+ years of MIDC expertise.",
     features: [
       "MIDC Plot Allotment",
       "NOC Applications",
@@ -400,7 +400,7 @@ const serviceContent = {
         desc: "All MIDC-related services under one roof.",
       },
       {
-        title: "26+ Years Experience",
+        title: "27+ Years Experience",
         desc: "Deep understanding of all MIDC procedures.",
       },
       {
@@ -504,7 +504,7 @@ const serviceContent = {
 
 const defaultContent = {
   intro:
-    "Expert industrial consulting with 26+ years of MIDC experience. Complete support from first inquiry to project completion in Nashik, Pune, and Chakan.",
+    "Expert industrial consulting with 27+ years of MIDC experience. Complete support from first inquiry to project completion in Nashik, Pune, and Chakan.",
   features: [
     "Expert Consultation",
     "Documentation Support",
@@ -531,7 +531,7 @@ const defaultContent = {
     {
       question: "Why choose Bhumi Industrial Consultant for MIDC work?",
       answer:
-        "With 26+ years of experience, FI-ACC accreditation, and 1000+ successful projects, Milind Rajhans personally handles each case for the best outcome with minimum hassle. Call us at +91 90960 99960 or +91 98223 72070 for a free consultation.",
+        "With 27+ years of experience, FI-ACC accreditation, and 1000+ successful projects, Milind Rajhans personally handles each case for the best outcome with minimum hassle. Call us at +91 90960 99960 or +91 98223 72070 for a free consultation.",
     },
     {
       question: "Is the first consultation free?",
@@ -574,7 +574,7 @@ export default async function IndustrialServicePage({ params }) {
   const whyChooseItems = [
     {
       icon: <Clock className="w-8 h-8" />,
-      title: "26+ Years Experience",
+      title: "27+ Years Experience",
       desc: "Decades of expertise in MIDC and industrial consulting.",
     },
     {
@@ -753,7 +753,7 @@ export default async function IndustrialServicePage({ params }) {
                       <div>
                         <p className="font-bold text-lg">Milind Rajhans</p>
                         <p className="text-[#f97316] text-sm font-semibold">
-                          FI-ACC · 26+ Years MIDC Experience
+                          FI-ACC · 27+ Years MIDC Experience
                         </p>
                       </div>
                     </div>

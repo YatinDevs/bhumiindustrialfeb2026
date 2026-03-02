@@ -30,7 +30,7 @@ export const dynamic = "force-static";
 const stats = [
   {
     icon: Calendar,
-    value: "26+",
+    value: "27+",
     label: "Years of Excellence",
     color: "text-[#f97316]",
   },
@@ -88,7 +88,7 @@ const team = [
     name: "Milind Rajhans",
     role: "Founder & Lead Consultant",
     qualification: "FI-ACC",
-    experience: "26+ Years",
+    experience: "27+ Years",
     image: founderImage, // Add founder image here
     initial: "M",
   },
@@ -172,7 +172,7 @@ export default function AboutPage() {
               About Bhumi Industrial
             </span>
             <h1 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight max-w-4xl">
-              26+ Years of Industrial{" "}
+              27+ Years of Industrial{" "}
               <span className="text-[#f97316]">Excellence</span> in Nashik
             </h1>
             <p className="text-xl text-[#d9e6f2] max-w-3xl mb-8">
@@ -336,7 +336,7 @@ export default function AboutPage() {
                   <div className="mb-6">
                     <div className="flex items-center gap-2 mb-4">
                       <Award className="w-5 h-5 text-[#f97316]" />
-                      <span className="text-sm font-semibold text-gray-500">26+ YEARS EXPERIENCE</span>
+                      <span className="text-sm font-semibold text-gray-500">27+ YEARS EXPERIENCE</span>
                     </div>
                     <p className="text-gray-700 mb-4 leading-relaxed">
                       With over 26 years of hands-on experience, Milind Rajhans
@@ -465,7 +465,7 @@ export default function AboutPage() {
                 Our Journey
               </span>
               <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">
-                26+ Years of Excellence
+                27+ Years of Excellence
               </h2>
             </div>
             <div className="max-w-3xl mx-auto">
@@ -539,7 +539,7 @@ export default function AboutPage() {
               Ready to Work with Nashik's Best Industrial Consultants?
             </h2>
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              Free consultation with Milind Rajhans. 26+ years of expertise,
+              Free consultation with Milind Rajhans. 27+ years of expertise,
               1000+ projects delivered.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">

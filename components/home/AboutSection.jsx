@@ -16,7 +16,7 @@ const AboutSection = () => {
   const stats = [
     {
       icon: <Calendar className="w-6 h-6" />,
-      value: "26+",
+      value: "27+",
       label: "Years of Excellence",
     },
     {

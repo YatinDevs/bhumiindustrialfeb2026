@@ -55,7 +55,7 @@ const serviceIcons = {
 };
 
 const highlights = [
-  "26+ years financial consulting experience",
+  "27+ years financial consulting experience",
   "500+ term loans processed successfully",
   "CMA/DPR reports with 95%+ bank approval rates",
   "MSME Udyam registration in 24 hours",
@@ -130,7 +130,7 @@ export default function FinancialPage() {
               <span className="text-[#f97316] font-semibold">
                 FI-ACC accredited
               </span>{" "}
-              · 26+ years experience · 1000+ projects.
+              · 27+ years experience · 1000+ projects.
             </p>
 
             {/* Bank Partners */}

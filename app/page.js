@@ -11,6 +11,7 @@ import ServicesSection from "@/components/home/ServicesSection";
 import CTASection from "@/components/home/CTASection";
 import WhyUsSection from "@/components/home/WhyUsSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
+import PartnersShowcase from "@/components/home/PartnersShowcase";
 
 // ── SEO metadata (Next.js puts this in <head>) ───────────────────────────────
 export const metadata = buildMetadata("home");
@@ -29,6 +30,7 @@ export default function HomePage() {
         <ServicesSection />
         <WhyUsSection />
         <TestimonialsSection />
+        <PartnersShowcase />
         <CTASection />
       </main>
     </SeoWrapper>

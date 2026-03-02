@@ -107,7 +107,7 @@ const CTASection = () => {
         {/* Stats Bar */}
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 bg-white p-8 rounded-2xl shadow-lg">
           <div className="text-center">
-            <div className="text-3xl font-bold text-[#f97316]">26+</div>
+            <div className="text-3xl font-bold text-[#f97316]">27+</div>
             <div className="text-sm text-gray-600">Years Experience</div>
           </div>
           <div className="text-center">

@@ -5,7 +5,7 @@ export const siteSEO = {
   defaultTitle:
     "Bhumi Industrial Consultant Nashik | MIDC All Services | MSME Udyam | FI-ACC",
   defaultDescription:
-    "26+ years MIDC NOC, MSME Udyam registration, DPR/CMA reports, term loans, project finance. Nashik Ambad Satpur Pune Chakan industrial consultants since 1999",
+    "27+ years MIDC NOC, MSME Udyam registration, DPR/CMA reports, term loans, project finance. Nashik Ambad Satpur Pune Chakan industrial consultants since 1999",
   baseUrl: "https://bhumiindustrial.com",
   defaultImage: "/og-bhumi-nashik.jpg",
   locale: "en_IN",
@@ -21,7 +21,7 @@ export const pageSEO = {
     title:
       "Bhumi Industrial Consultant Nashik | MIDC All Services | MSME Udyam | Term Loans | FI-ACC",
     description:
-      "Complete industrial & financial consulting. MIDC NOC, MSME Udyam registration, DPR/CMA reports, term loans, project finance. Nashik Ambad Satpur 26+ years experts",
+      "Complete industrial & financial consulting. MIDC NOC, MSME Udyam registration, DPR/CMA reports, term loans, project finance. Nashik Ambad Satpur 27+ years experts",
     keywords:
       "MIDC consultant Nashik, MSME Udyam registration Nashik, industrial consultant Nashik, project finance Nashik, DPR report Nashik, term loan consultant Nashik, FI-ACC Nashik",
     canonical: "/",
@@ -158,7 +158,7 @@ export const industrialServices = {
     title:
       "Industrial Project Planning & Execution Nashik | Bhumi Industrial Consultant",
     description:
-      "Complete industrial project planning from concept to execution. Site analysis, feasibility, MIDC approvals, project execution Nashik Ambad Satpur experts 26+ years",
+      "Complete industrial project planning from concept to execution. Site analysis, feasibility, MIDC approvals, project execution Nashik Ambad Satpur experts 27+ years",
     keywords:
       "industrial project planning Nashik, factory setup consultant Nashik, project execution Nashik, MIDC project planning Nashik",
     h1: "Industrial Project Planning & Execution in Nashik",
@@ -198,7 +198,7 @@ export const industrialServices = {
     title:
       "MIDC Project Report Nashik | DPR Preparation | Bhumi Industrial Consultant",
     description:
-      "MIDC project reports Nashik. Detailed Project Reports (DPR) for MIDC approvals Ambad Satpur Sinnar industrial plots. 26+ years expertise",
+      "MIDC project reports Nashik. Detailed Project Reports (DPR) for MIDC approvals Ambad Satpur Sinnar industrial plots. 27+ years expertise",
     keywords:
       "MIDC project report Nashik, DPR consultant Nashik, detailed project report MIDC, MIDC DPR Ambad Satpur",
     h1: "MIDC Project Report (DPR) Preparation in Nashik",

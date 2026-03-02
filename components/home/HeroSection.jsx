@@ -45,7 +45,7 @@ const HeroSection = () => {
       title: "Industrial Consulting Experts",
       subtitle: "MIDC Services | Project Finance | MSME Udyam",
       description:
-        "26+ years of excellence in industrial project planning, MIDC approvals, and financial consulting across Nashik, Pune & Chakan.",
+        "27+ years of excellence in industrial project planning, MIDC approvals, and financial consulting across Nashik, Pune & Chakan.",
       cta: {
         primary: {
           text: "Explore Industrial Services",
@@ -87,7 +87,7 @@ const HeroSection = () => {
     {
       id: 4,
       title: "Your Trusted Partner Since 1999",
-      subtitle: "Milind Rajhans - FI-ACC | 26+ Years Experience",
+      subtitle: "Milind Rajhans - FI-ACC | 27+ Years Experience",
       description:
         "Led by Milind Rajhans, we've successfully handled 1000+ MIDC projects and financial consultations for industrial clients.",
       cta: {

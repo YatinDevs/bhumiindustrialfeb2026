@@ -49,7 +49,7 @@ const serviceIcons = {
 };
 
 const whyChoose = [
-  "26+ years MIDC experience in Nashik, Pune & Chakan",
+  "27+ years MIDC experience in Nashik, Pune & Chakan",
   "1000+ successful MIDC projects completed",
   "Direct access to Milind Rajhans — FI-ACC certified",
   "End-to-end support from application to approval",
@@ -121,7 +121,7 @@ export default function IndustrialPage() {
             </h1>
 
             <p className="text-xl text-[#d9e6f2] max-w-3xl mb-8">
-              Complete MIDC services from NOC to water connection. 26+ years
+              Complete MIDC services from NOC to water connection. 27+ years
               experience.{" "}
               <span className="text-[#f97316] font-semibold">
                 Nashik · Mumbai · Pune · Nagpur
@@ -173,7 +173,7 @@ export default function IndustrialPage() {
               {[
                 {
                   icon: <Clock className="w-5 h-5" />,
-                  value: "26+",
+                  value: "27+",
                   label: "Years Experience",
                 },
                 {
@@ -293,7 +293,7 @@ export default function IndustrialPage() {
                     "MIDC Projects",
                     "bg-gradient-to-br from-[#001a33] to-[#003366] text-white",
                   ],
-                  ["26+", "Years Experience", "bg-white"],
+                  ["27+", "Years Experience", "bg-white"],
                   ["100%", "Approval Rate", "bg-white"],
                   [
                     "25+",

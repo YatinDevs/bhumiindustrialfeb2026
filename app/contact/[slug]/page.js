@@ -299,7 +299,7 @@ export default async function ContactLocationPage({ params }) {
                           FI-ACC
                         </p>
                         <p className="text-white/60 text-xs">
-                          Founder, 26+ Years Experience
+                          Founder, 27+ Years Experience
                         </p>
                       </div>
                     </div>

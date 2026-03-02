@@ -227,7 +227,7 @@ export default function Navbar() {
         { name: "Company Profile", href: "/about#company-profile" },
         { name: "Our Founder - Milind Rajhans", href: "/about#founder" },
         { name: "Our Team", href: "/about#team" },
-        { name: "26+ Years of Excellence", href: "/about#milestones" },
+        { name: "27+ Years of Excellence", href: "/about#milestones" },
         { name: "Testimonials", href: "/about#testimonials" },
       ],
     },
@@ -639,7 +639,7 @@ export default function Navbar() {
                       className="block p-3 text-gray-600 hover:text-[#f97316] hover:bg-[#fff7ed] rounded-lg text-sm"
                       onClick={() => setMobileOpen(false)}
                     >
-                      26+ Years of Excellence
+                      27+ Years of Excellence
                     </Link>
                     <Link
                       href="/about#testimonials"

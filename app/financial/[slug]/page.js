@@ -571,7 +571,7 @@ const serviceContent = {
 
 const defaultContent = {
   intro:
-    "Professional financial consulting services with 26+ years of expertise. Complete support from advisory to final execution for industrial units in Nashik, Pune, and Chakan.",
+    "Professional financial consulting services with 27+ years of expertise. Complete support from advisory to final execution for industrial units in Nashik, Pune, and Chakan.",
   features: [
     "Expert Consultation",
     "Documentation Support",
@@ -598,7 +598,7 @@ const defaultContent = {
     {
       question: "Why choose Bhumi Industrial Consultant?",
       answer:
-        "With 26+ years of experience, FI-ACC accreditation, and 1000+ successful projects, Milind Rajhans personally handles each case for the best outcome. Call us at +91 90960 99960 or +91 98223 72070 for a free consultation.",
+        "With 27+ years of experience, FI-ACC accreditation, and 1000+ successful projects, Milind Rajhans personally handles each case for the best outcome. Call us at +91 90960 99960 or +91 98223 72070 for a free consultation.",
     },
     {
       question: "Is the first consultation free?",
@@ -641,7 +641,7 @@ export default async function FinancialServicePage({ params }) {
   const whyChooseItems = [
     {
       icon: <Clock className="w-8 h-8" />,
-      title: "26+ Years Experience",
+      title: "27+ Years Experience",
       desc: "Decades of expertise in financial consulting for industrial units.",
     },
     {
@@ -837,7 +837,7 @@ export default async function FinancialServicePage({ params }) {
                       <div>
                         <p className="font-bold text-lg">Milind Rajhans</p>
                         <p className="text-[#f97316] text-sm font-semibold">
-                          FI-ACC · 26+ Years Experience
+                          FI-ACC · 27+ Years Experience
                         </p>
                       </div>
                     </div>

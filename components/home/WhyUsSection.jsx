@@ -111,7 +111,7 @@ export default function WhyUsSection() {
         <div className="flex flex-wrap justify-center gap-6 mt-10 pt-6 border-t border-gray-200">
           <div className="flex items-center gap-2 text-sm text-gray-600">
             <Shield className="w-4 h-4 text-[#f97316]" />
-            <span>26+ Years Experience</span>
+            <span>27+ Years Experience</span>
           </div>
           <div className="flex items-center gap-2 text-sm text-gray-600">
             <Award className="w-4 h-4 text-[#f97316]" />
