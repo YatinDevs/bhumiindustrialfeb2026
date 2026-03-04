@@ -166,7 +166,7 @@ export default function ContactFormClient({ defaultLocation = "Mumbai" }) {
         <p className="text-gray-600 mb-6 max-w-md">
           Thank you for reaching out to Bhumi Industrial Consultant.
           {form.preferred_location === "Nashik"
-            ? " Milind Rajhans will call you back within 2 business hours."
+            ? " Milind P. Rajhans will call you back within 2 business hours."
             : ` Our ${form.preferred_location} office team will contact you within 2 business hours.`}
         </p>
         <div className="mt-4  ">

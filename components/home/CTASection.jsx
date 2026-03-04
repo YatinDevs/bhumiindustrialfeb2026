@@ -73,11 +73,10 @@ const CTASection = () => {
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
-                href="/enquiry"
+                href="tel:+919096099960"
                 className="flex items-center gap-2 px-8 py-4 border-2 border-white text-white rounded-xl font-bold hover:bg-white/20 hover:scale-105 transition-all"
               >
-                <Calendar className="w-5 h-5" />
-                Schedule a Meeting
+                <Phone className="w-5 h-5" /> +91 90960 99960
               </Link>
             </div>
           </div>
@@ -111,11 +110,11 @@ const CTASection = () => {
             <div className="text-sm text-gray-600">Years Experience</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-[#f97316]">1000+</div>
+            <div className="text-3xl font-bold text-[#f97316]">4000+</div>
             <div className="text-sm text-gray-600">Projects</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-[#f97316]">500+</div>
+            <div className="text-3xl font-bold text-[#f97316]">3500+</div>
             <div className="text-sm text-gray-600">Happy Clients</div>
           </div>
           <div className="text-center">

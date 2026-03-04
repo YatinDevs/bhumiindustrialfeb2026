@@ -14,7 +14,7 @@ const reasons = [
   {
     icon: Users,
     title: "Direct Expert Access",
-    desc: "You speak with Milind Rajhans directly — not juniors. 26 years of experience on every call.",
+    desc: "You speak with Milind P. Rajhans directly — not juniors. 27 years of experience on every call.",
     color: "text-[#003366]",
     bg: "bg-[#003366]/10",
   },
@@ -42,7 +42,7 @@ const reasons = [
   {
     icon: TrendingUp,
     title: "Proven Track Record",
-    desc: "1000+ projects. 500+ term loans. ₹500Cr+ finance arranged. Our results speak for themselves.",
+    desc: "4000+ projects. 500+ term loans. ₹2000Cr+ finance arranged. Our results speak for themselves.",
     color: "text-[#003366]",
     bg: "bg-[#003366]/10",
   },
@@ -119,11 +119,11 @@ export default function WhyUsSection() {
           </div>
           <div className="flex items-center gap-2 text-sm text-gray-600">
             <Users className="w-4 h-4 text-[#f97316]" />
-            <span>1000+ Projects</span>
+            <span>4000+ projects</span>
           </div>
           <div className="flex items-center gap-2 text-sm text-gray-600">
             <TrendingUp className="w-4 h-4 text-[#f97316]" />
-            <span>₹500Cr+ Finance</span>
+            <span>₹2000Cr+ Finance</span>
           </div>
         </div>
       </div>

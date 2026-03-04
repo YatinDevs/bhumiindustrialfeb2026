@@ -38,7 +38,7 @@ export default function TestimonialsSection() {
             What Our Clients Say
           </h2>
           <p className="text-gray-600 max-w-xl mx-auto">
-            500+ satisfied clients across Nashik, Pune, and Maharashtra
+            3500+ satisfied clients across Nashik, Pune, and Maharashtra
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-6">

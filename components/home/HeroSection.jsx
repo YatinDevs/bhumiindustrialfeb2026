@@ -11,6 +11,8 @@ import {
   FileText,
   Users,
   Handshake,
+  Calculator,
+  ScrollText,
 } from "lucide-react";
 
 const HeroSection = () => {
@@ -38,7 +40,7 @@ const HeroSection = () => {
       },
       image:
         "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&auto=format&q=80",
-      bgColor: "from-purple-900/40 to-[#f97316]/30", // Reduced opacity from 90 to 40
+      bgColor: "from-purple-900/40 to-[#f97316]/30",
     },
     {
       id: 2,
@@ -60,14 +62,58 @@ const HeroSection = () => {
       },
       image:
         "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=1200&auto=format&q=80",
-      bgColor: "from-blue-900/40 to-[#f97316]/30", // Reduced opacity from 90 to 40
+      bgColor: "from-blue-900/40 to-[#f97316]/30",
     },
     {
       id: 3,
-      title: "Financial Solutions That Work",
-      subtitle: "Term Loans | DPR/CMA Reports | Working Capital",
+      title: "CMA Data & DPR Reports",
+      subtitle: "Credit Monitoring Arrangement | Detailed Project Reports",
       description:
-        "Comprehensive financial services including term loans, project finance, MSME Udyam registration, and subsidy compliance.",
+        "Professional CMA data and DPR report preparation for bank loans. 95%+ bank approval rate with our expertly crafted financial documents. Trusted by 3500+ industrial clients.",
+      cta: {
+        primary: {
+          text: "CMA/DPR Services",
+          link: "/financial/cma-cra-dpr-report",
+          icon: <Calculator className="w-5 h-5" />,
+        },
+        secondary: {
+          text: "Talk to Expert",
+          link: "/contact",
+          icon: <Phone className="w-5 h-5" />,
+        },
+      },
+      image:
+        "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1200&auto=format&q=80",
+      bgColor: "from-emerald-900/40 to-[#f97316]/30",
+    },
+    {
+      id: 4,
+      title: "MIDC Licenses & NOC",
+      subtitle: "Factory License | Pollution NOC | Fire NOC | DIC Clearance",
+      description:
+        "Complete assistance with all MIDC licenses and NOCs. Factory license, pollution board clearance, fire NOC, and DIC registrations. Fast processing with 100% compliance.",
+      cta: {
+        primary: {
+          text: "View License Services",
+          link: "/financial/licenses",
+          icon: <ScrollText className="w-5 h-5" />,
+        },
+        secondary: {
+          text: "Contact Us",
+          link: "/contact",
+          icon: <Phone className="w-5 h-5" />,
+        },
+      },
+      image:
+        "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&auto=format&q=80",
+      bgColor: "from-amber-900/40 to-[#f97316]/30",
+    },
+    {
+      id: 5,
+      title: "Financial Solutions That Work",
+      subtitle: "Term Loans | Working Capital | Subsidy Compliance",
+      description:
+        "Comprehensive financial services including term loans, project finance, MSME Udyam registration, and subsidy compliance for industrial units.",
       cta: {
         primary: {
           text: "View Financial Services",
@@ -81,15 +127,15 @@ const HeroSection = () => {
         },
       },
       image:
-        "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1200&auto=format&q=80",
-      bgColor: "from-[#f97316]/30 to-blue-900/40", // Reduced opacity
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&auto=format&q=80",
+      bgColor: "from-[#f97316]/30 to-blue-900/40",
     },
     {
-      id: 4,
+      id: 6,
       title: "Your Trusted Partner Since 1999",
-      subtitle: "Milind Rajhans - FI-ACC | 27+ Years Experience",
+      subtitle: "Milind P. Rajhans - FI-ACC | 27+ Years Experience",
       description:
-        "Led by Milind Rajhans, we've successfully handled 1000+ MIDC projects and financial consultations for industrial clients.",
+        "Led by Milind P. Rajhans, we've successfully handled 4000+ MIDC projects and financial consultations for industrial clients across Maharashtra.",
       cta: {
         primary: {
           text: "Know Our Story",
@@ -103,8 +149,8 @@ const HeroSection = () => {
         },
       },
       image:
-        "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&auto=format&q=80",
-      bgColor: "from-gray-900/40 to-[#f97316]/30", // Reduced opacity from 90 to 40
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&auto=format&q=80",
+      bgColor: "from-gray-900/40 to-[#f97316]/30",
     },
   ];
 
@@ -180,7 +226,7 @@ const HeroSection = () => {
                   }
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
-                  quality={90} // Increased quality from 85 to 90
+                  quality={90}
                   onLoad={() => handleImageLoad(slide.id)}
                   style={{
                     aspectRatio: "16/9",
@@ -190,7 +236,7 @@ const HeroSection = () => {
                 {/* Multiple overlay layers for better control */}
                 
                 {/* 1. Very subtle dark overlay for text contrast - much lighter now */}
-                <div className="absolute inset-0 bg-black/20" /> {/* Reduced from black/50 to black/20 */}
+                <div className="absolute inset-0 bg-black/20" />
                 
                 {/* 2. Gradient overlay with much lower opacity */}
                 <div

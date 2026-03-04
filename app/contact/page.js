@@ -104,36 +104,121 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* ── MAIN CONTACT CARDS ───────────────────────────── */}
-        <section className="py-12 bg-[#fff7ed]">
+        {/* ── FORM + INFO 2-COLUMN SECTION ──────────────────── */}
+        <section className="py-16 bg-white">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              {mainContactMethods.map((m, i) => (
-                <a
-                  key={i}
-                  href={m.href}
-                  target={m.href.startsWith("http") && !m.href.startsWith("/") ? "_blank" : undefined}
-                  rel={m.href.startsWith("http") && !m.href.startsWith("/") ? "noopener noreferrer" : undefined}
-                  className="group flex flex-col items-center text-center p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
-                >
-                  <div
-                    className={`${m.color} text-white w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}
-                  >
-                    <m.icon className="w-7 h-7" />
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Get in Touch</h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Fill out the form below and we'll get back to you within 2 hours during business hours.
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-8">
+              {/* Left Column - Contact Form */}
+              <div className="bg-[#fff7ed] p-8 rounded-2xl">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Send Us a Message</h3>
+                <p className="text-gray-600 mb-6 text-sm">
+                  Fill in your details and we'll connect you with the right office.
+                </p>
+                <ContactFormClient />
+              </div>
+
+              {/* Right Column - Info Cards */}
+              <div className="space-y-6">
+                {/* Expert card */}
+                <div className="bg-gradient-to-br from-[#001a33] to-[#003366] text-white p-7 rounded-2xl">
+                  <div className="flex items-center gap-4 mb-5">
+                    <div className="w-16 h-16 rounded-full bg-[#f97316] flex items-center justify-center text-2xl font-bold flex-shrink-0">
+                      M
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg">Milind P. Rajhans</h3>
+                      <p className="text-[#f97316] font-semibold text-sm">
+                        FI-ACC
+                      </p>
+                      <p className="text-white/60 text-xs">
+                        Founder, 27+ Years Experience
+                      </p>
+                    </div>
                   </div>
-                  <p className="font-bold text-gray-900 mb-1">{m.title}</p>
-                  <p className="text-sm text-[#ea580c] font-medium mb-1">
-                    {m.value}
+                  <div className="flex gap-1 mb-4">
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <Star
+                        key={s}
+                        className="w-4 h-4 text-[#f97316] fill-[#f97316]"
+                      />
+                    ))}
+                    <span className="text-white/60 text-sm ml-2">
+                      3500+ clients
+                    </span>
+                  </div>
+                  <p className="text-white/70 text-sm mb-5">
+                    Direct consultation with the founder at our Nashik head office.
+                    For other locations, you'll be connected with our senior consultants.
                   </p>
-                  <p className="text-xs text-gray-500">{m.sub}</p>
-                </a>
-              ))}
+                  <div className="space-y-3">
+                    <a
+                      href="tel:+919096099960"
+                      className="flex items-center justify-center gap-2 w-full py-3 bg-[#f97316] hover:bg-[#ea580c] rounded-xl font-bold transition-colors text-sm"
+                    >
+                      <Phone className="w-4 h-4" /> Call: +91 90960 99960
+                    </a>
+                    <a
+                      href="tel:+919822372070"
+                      className="flex items-center justify-center gap-2 w-full py-3 bg-[#ea580c] hover:bg-[#dc2626] rounded-xl font-bold transition-colors text-sm"
+                    >
+                      <Phone className="w-4 h-4" /> Alt: +91 98223 72070
+                    </a>
+                  </div>
+                </div>
+
+                {/* Office hours */}
+                <div className="bg-[#fff7ed] p-6 rounded-2xl">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Clock className="w-5 h-5 text-[#f97316]" />
+                    <h3 className="font-bold text-gray-900">General Office Hours</h3>
+                  </div>
+                  <div className="space-y-2 text-sm">
+                    {[
+                      ["Monday–Friday", "9:00 AM – 6:00 PM"],
+                      ["Saturday", "9:00 AM – 2:00 PM"],
+                      ["Sunday", "Closed"],
+                    ].map(([d, h], i) => (
+                      <div
+                        key={i}
+                        className="flex justify-between text-gray-700 border-b border-gray-200 pb-2 last:border-0"
+                      >
+                        <span>{d}</span>
+                        <span className="font-medium">{h}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-gray-500 mt-4">
+                    *Hours may vary by location. Check specific office pages for details.
+                  </p>
+                </div>
+
+                {/* Email contact */}
+                <div className="bg-[#fff7ed] p-6 rounded-2xl">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Mail className="w-5 h-5 text-[#f97316]" />
+                    <h3 className="font-bold text-gray-900">Email Us</h3>
+                  </div>
+                  <a
+                    href="mailto:info@bhumiindustrial.com"
+                    className="text-[#f97316] hover:underline font-medium text-sm break-all"
+                  >
+                    info@bhumiindustrial.com
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
         {/* ── OFFICE LOCATIONS GRID ────────────────────────── */}
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-[#fff7ed]">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Office Locations</h2>
@@ -184,112 +269,30 @@ export default function ContactPage() {
             </div>
           </div>
         </section>
-
-        {/* ── FORM + INFO ──────────────────────────────────── */}
-        <section className="py-16 bg-[#fff7ed]">
+        {/* ── MAIN CONTACT CARDS ───────────────────────────── */}
+        <section className="py-12 bg-[#fff7ed]">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-5 gap-12">
-              {/* Form (3/5) */}
-              <div className="lg:col-span-3">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                  Send Us a Message
-                </h2>
-                <p className="text-gray-600 mb-8 text-sm">
-                  Fill in your details and we'll connect you with the right office.
-                  We typically respond within 2 hours during business hours.
-                </p>
-                <ContactFormClient />
-              </div>
-
-              {/* Info sidebar (2/5) */}
-              <div className="lg:col-span-2 space-y-6">
-                {/* Expert card */}
-                <div className="bg-gradient-to-br from-[#001a33] to-[#003366] text-white p-7 rounded-2xl">
-                  <div className="flex items-center gap-4 mb-5">
-                    <div className="w-16 h-16 rounded-full bg-[#f97316] flex items-center justify-center text-2xl font-bold flex-shrink-0">
-                      M
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg">Milind Rajhans</h3>
-                      <p className="text-[#f97316] font-semibold text-sm">
-                        FI-ACC
-                      </p>
-                      <p className="text-white/60 text-xs">
-                        Founder, 27+ Years Experience
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex gap-1 mb-4">
-                    {[1, 2, 3, 4, 5].map((s) => (
-                      <Star
-                        key={s}
-                        className="w-4 h-4 text-[#f97316] fill-[#f97316]"
-                      />
-                    ))}
-                    <span className="text-white/60 text-sm ml-2">
-                      500+ clients
-                    </span>
-                  </div>
-                  <p className="text-white/70 text-sm mb-5">
-                    Direct consultation with the founder at our Nashik head office.
-                    For other locations, you'll be connected with our senior consultants.
-                  </p>
-                  <div className="space-y-3">
-                    <a
-                      href="tel:+919096099960"
-                      className="flex items-center justify-center gap-2 w-full py-3 bg-[#f97316] hover:bg-[#ea580c] rounded-xl font-bold transition-colors text-sm"
-                    >
-                      <Phone className="w-4 h-4" /> Call: +91 90960 99960
-                    </a>
-                    <a
-                      href="tel:+919822372070"
-                      className="flex items-center justify-center gap-2 w-full py-3 bg-[#ea580c] hover:bg-[#dc2626] rounded-xl font-bold transition-colors text-sm"
-                    >
-                      <Phone className="w-4 h-4" /> Alt: +91 98223 72070
-                    </a>
-                  </div>
-                </div>
-
-                {/* Office hours */}
-                <div className="bg-white p-6 rounded-2xl">
-                  <div className="flex items-center gap-3 mb-4">
-                    <Clock className="w-5 h-5 text-[#f97316]" />
-                    <h3 className="font-bold text-gray-900">General Office Hours</h3>
-                  </div>
-                  <div className="space-y-2 text-sm">
-                    {[
-                      ["Monday–Friday", "9:00 AM – 6:00 PM"],
-                      ["Saturday", "9:00 AM – 2:00 PM"],
-                      ["Sunday", "Closed"],
-                    ].map(([d, h], i) => (
-                      <div
-                        key={i}
-                        className="flex justify-between text-gray-700 border-b border-gray-100 pb-2 last:border-0"
-                      >
-                        <span>{d}</span>
-                        <span className="font-medium">{h}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <p className="text-xs text-gray-500 mt-4">
-                    *Hours may vary by location. Check specific office pages for details.
-                  </p>
-                </div>
-
-                {/* Email contact */}
-                <div className="bg-white p-6 rounded-2xl">
-                  <div className="flex items-center gap-3 mb-4">
-                    <Mail className="w-5 h-5 text-[#f97316]" />
-                    <h3 className="font-bold text-gray-900">Email Us</h3>
-                  </div>
-                  <a
-                    href="mailto:info@bhumiindustrial.com"
-                    className="text-[#f97316] hover:underline font-medium text-sm break-all"
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              {mainContactMethods.map((m, i) => (
+                <a
+                  key={i}
+                  href={m.href}
+                  target={m.href.startsWith("http") && !m.href.startsWith("/") ? "_blank" : undefined}
+                  rel={m.href.startsWith("http") && !m.href.startsWith("/") ? "noopener noreferrer" : undefined}
+                  className="group flex flex-col items-center text-center p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+                >
+                  <div
+                    className={`${m.color} text-white w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}
                   >
-                    info@bhumiindustrial.com
-                  </a>
-                </div>
-              </div>
+                    <m.icon className="w-7 h-7" />
+                  </div>
+                  <p className="font-bold text-gray-900 mb-1">{m.title}</p>
+                  <p className="text-sm text-[#ea580c] font-medium mb-1">
+                    {m.value}
+                  </p>
+                  <p className="text-xs text-gray-500">{m.sub}</p>
+                </a>
+              ))}
             </div>
           </div>
         </section>

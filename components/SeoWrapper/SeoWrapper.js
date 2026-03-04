@@ -15,7 +15,7 @@ export default function SeoWrapper({ schemas = [], pageUrl = "/", children }) {
         alternateName: [
           "FI-ACC",
           "Bhumi Industrial Consultant",
-          "Milind Rajhans Consultant",
+          "Milind P. Rajhans Consultant",
         ],
         url: `${siteSEO.baseUrl}${pageUrl}`,
         telephone: siteSEO.phone,
@@ -61,7 +61,7 @@ export default function SeoWrapper({ schemas = [], pageUrl = "/", children }) {
         foundingDate: "1999",
         founder: {
           "@type": "Person",
-          name: "Milind Rajhans",
+          name: "Milind P. Rajhans",
           honorificSuffix: "FI-ACC",
         },
         contactPoint: {

@@ -225,7 +225,7 @@ export default function Navbar() {
       type: "dropdown",
       dropdown: [
         { name: "Company Profile", href: "/about#company-profile" },
-        { name: "Our Founder - Milind Rajhans", href: "/about#founder" },
+        { name: "Our Founder - Milind P. Rajhans", href: "/about#founder" },
         { name: "Our Team", href: "/about#team" },
         { name: "27+ Years of Excellence", href: "/about#milestones" },
         { name: "Testimonials", href: "/about#testimonials" },
@@ -249,7 +249,7 @@ export default function Navbar() {
   ];
 
   const handleDownloadBrochure = () => {
-    const brochureUrl = "/brochure.pdf";
+    const brochureUrl = "/MPR Brochure - 27 Oct.pdf";
     const link = document.createElement("a");
     link.href = brochureUrl;
     link.download = "Bhumi-Industrial-Consultant-Brochure.pdf";

@@ -21,12 +21,12 @@ const AboutSection = () => {
     },
     {
       icon: <Users className="w-6 h-6" />,
-      value: "1000+",
+      value: "4000+",
       label: "Projects Completed",
     },
     {
       icon: <Star className="w-6 h-6" />,
-      value: "500+",
+      value: "3500+",
       label: "Happy Clients",
     },
     {
@@ -37,11 +37,11 @@ const AboutSection = () => {
   ];
 
   const milestones = [
-    { year: "1999", text: "Bhumi Industrial Founded by Milind Rajhans" },
+    { year: "1999", text: "Started as FI-ACC Project Finance Consultant" },
     { year: "2005", text: "Expanded to MIDC consultancy services" },
     { year: "2010", text: "Started Financial Advisory vertical" },
-    { year: "2015", text: "FI-ACC accreditation received" },
-    { year: "2024", text: "Serving 1000+ clients across Maharashtra" },
+    { year: "2015", text: "Established Bhumi Industrial Consultant by Milind P. Rajhans" },
+    { year: "2026", text: "Serving 3500+ clients across Maharashtra" },
   ];
 
   return (
@@ -60,7 +60,7 @@ const AboutSection = () => {
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Led by{" "}
-            <span className="font-bold text-[#ea580c]">Milind Rajhans</span>,
+            <span className="font-bold text-[#ea580c]">Milind P. Rajhans</span>,
             we've been the backbone of industrial development in Nashik, Pune &
             Chakan since 1999.
           </p>
@@ -72,14 +72,14 @@ const AboutSection = () => {
             <div className="relative rounded-3xl overflow-hidden shadow-2xl mb-8">
               <Image
                 src={founderImage}
-                alt="Milind Rajhans - Founder"
+                alt="Milind P. Rajhans - Founder"
                 className="w-full h-[400px] object-cover"
                 width={800}
                 height={400}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
               <div className="absolute bottom-6 left-6 text-white">
-                <h3 className="text-2xl font-bold">Milind Rajhans</h3>
+                <h3 className="text-2xl font-bold">Milind P. Rajhans</h3>
                 <p className="text-white/90">
                   Founder & Lead Consultant | FI-ACC
                 </p>
@@ -135,7 +135,7 @@ const AboutSection = () => {
                     Strategic Locations
                   </h4>
                   <p className="text-gray-600">
-                    Serving Ambad MIDC, Satpur MIDC, Sinnar MIDC, Pune & Chakan
+                    Serving Ambad MIDC, Satpur MIDC, Dindori MIDC, Sinnar MIDC, Pune & Chakan
                   </p>
                 </div>
               </div>

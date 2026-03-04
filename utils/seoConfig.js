@@ -13,7 +13,7 @@ export const siteSEO = {
   phone: "+91-9822242170",
   address: "Office no 301/302, Tulips Apartment, College Road, Nashik-422005",
   foundingYear: "1999",
-  founder: "Milind Rajhans",
+  founder: "Milind P. Rajhans",
 };
 
 export const pageSEO = {
@@ -49,11 +49,11 @@ export const pageSEO = {
   },
   about: {
     title:
-      "About Bhumi Industrial Consultant | Milind Rajhans FI-ACC Nashik | 26 Years Experience",
+      "About Bhumi Industrial Consultant | Milind P. Rajhans FI-ACC Nashik | 26 Years Experience",
     description:
-      "Milind Rajhans FI-ACC — 26 years largest MIDC deals Maharashtra. Nashik Ambad Satpur project finance + MSME Udyam experts since 1999. Complete industrial solutions",
+      "Milind P. Rajhans FI-ACC — 26 years largest MIDC deals Maharashtra. Nashik Ambad Satpur project finance + MSME Udyam experts since 1999. Complete industrial solutions",
     keywords:
-      "Milind Rajhans Nashik, FI-ACC consultant Nashik, industrial consultant Nashik, project finance expert Nashik, MSME consultant Nashik",
+      "Milind P. Rajhans Nashik, FI-ACC consultant Nashik, industrial consultant Nashik, project finance expert Nashik, MSME consultant Nashik",
     canonical: "/about",
     ogImage: "/og-about.jpg",
   },
@@ -63,7 +63,7 @@ export const pageSEO = {
     description:
       "Free consultation: MIDC NOC, MSME Udyam, DPR reports, term loans Nashik. Office: Tulips Apartment College Road Nashik. Call +91-9822242170 | infofiiacc@gmail.com",
     keywords:
-      "MIDC consultant contact Nashik, MSME Udyam contact Nashik, project finance phone Nashik, Milind Rajhans contact, FI-ACC Nashik phone",
+      "MIDC consultant contact Nashik, MSME Udyam contact Nashik, project finance phone Nashik, Milind P. Rajhans contact, FI-ACC Nashik phone",
     canonical: "/contact",
     ogImage: "/og-contact.jpg",
   },

@@ -130,7 +130,7 @@ export default function FinancialPage() {
               <span className="text-[#f97316] font-semibold">
                 FI-ACC accredited
               </span>{" "}
-              · 27+ years experience · 1000+ projects.
+              · 27+ years experience · 4000+ projects.
             </p>
 
             {/* Bank Partners */}
@@ -200,7 +200,7 @@ export default function FinancialPage() {
                 },
                 {
                   icon: <IndianRupee className="w-5 h-5" />,
-                  value: "₹500Cr+",
+                  value: "₹2000Cr+",
                   label: "Finance Arranged",
                 },
                 {
@@ -460,7 +460,7 @@ export default function FinancialPage() {
               Need Finance for Your Industry? Let's Talk.
             </h2>
             <p className="text-white/90 text-lg mb-8 max-w-xl mx-auto">
-              Free first consultation with Milind Rajhans (FI-ACC). We'll find
+              Free first consultation with Milind P. Rajhans (FI-ACC). We'll find
               the right financial solution for your business.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">

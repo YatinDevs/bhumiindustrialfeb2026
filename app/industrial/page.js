@@ -50,8 +50,8 @@ const serviceIcons = {
 
 const whyChoose = [
   "27+ years MIDC experience in Nashik, Pune & Chakan",
-  "1000+ successful MIDC projects completed",
-  "Direct access to Milind Rajhans — FI-ACC certified",
+  "4000+ successful MIDC projects completed",
+  "Direct access to Milind P. Rajhans — FI-ACC certified",
   "End-to-end support from application to approval",
   "100% compliance with latest MIDC regulations",
   "Fast turnaround — most NOCs within 30-45 days",
@@ -178,7 +178,7 @@ export default function IndustrialPage() {
                 },
                 {
                   icon: <Users className="w-5 h-5" />,
-                  value: "1000+",
+                  value: "4000+",
                   label: "MIDC Projects",
                 },
                 {
@@ -280,7 +280,7 @@ export default function IndustrialPage() {
                   href="/about"
                   className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#f97316] to-[#ea580c] text-white rounded-xl font-bold hover:shadow-lg transition-shadow group"
                 >
-                  Meet Milind Rajhans
+                  Meet Milind P. Rajhans
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
@@ -289,7 +289,7 @@ export default function IndustrialPage() {
               <div className="grid grid-cols-2 gap-4">
                 {[
                   [
-                    "1000+",
+                    "4000+",
                     "MIDC Projects",
                     "bg-gradient-to-br from-[#001a33] to-[#003366] text-white",
                   ],
@@ -382,7 +382,7 @@ export default function IndustrialPage() {
               Need MIDC Help? Talk to an Expert Now.
             </h2>
             <p className="text-white/90 text-lg mb-8 max-w-xl mx-auto">
-              Free first consultation with Milind Rajhans. No waiting, no
+              Free first consultation with Milind P. Rajhans. No waiting, no
               appointments — call directly for your MIDC requirements.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">

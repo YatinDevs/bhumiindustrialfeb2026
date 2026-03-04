@@ -524,14 +524,14 @@ const defaultContent = {
     },
     {
       title: "Guaranteed Results",
-      desc: "Proven track record with 1000+ successful MIDC projects.",
+      desc: "Proven track record with 4000+ successful MIDC projects.",
     },
   ],
   faqs: [
     {
       question: "Why choose Bhumi Industrial Consultant for MIDC work?",
       answer:
-        "With 27+ years of experience, FI-ACC accreditation, and 1000+ successful projects, Milind Rajhans personally handles each case for the best outcome with minimum hassle. Call us at +91 90960 99960 or +91 98223 72070 for a free consultation.",
+        "With 27+ years of experience, FI-ACC accreditation, and 4000+ successful projects, Milind P. Rajhans personally handles each case for the best outcome with minimum hassle. Call us at +91 90960 99960 or +91 98223 72070 for a free consultation.",
     },
     {
       question: "Is the first consultation free?",
@@ -580,11 +580,11 @@ export default async function IndustrialServicePage({ params }) {
     {
       icon: <Users className="w-8 h-8" />,
       title: "Expert Team",
-      desc: "Led by Milind Rajhans, FI-ACC certified consultant.",
+      desc: "Led by Milind P. Rajhans, FI-ACC certified consultant.",
     },
     {
       icon: <FileText className="w-8 h-8" />,
-      title: "1000+ Projects",
+      title: "4000+ projects",
       desc: "Proven track record with successful MIDC projects.",
     },
     {
@@ -751,7 +751,7 @@ export default async function IndustrialServicePage({ params }) {
                         M
                       </div>
                       <div>
-                        <p className="font-bold text-lg">Milind Rajhans</p>
+                        <p className="font-bold text-lg">Milind P. Rajhans</p>
                         <p className="text-[#f97316] text-sm font-semibold">
                           FI-ACC · 27+ Years MIDC Experience
                         </p>

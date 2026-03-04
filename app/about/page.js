@@ -36,13 +36,13 @@ const stats = [
   },
   {
     icon: Users,
-    value: "1000+",
+    value: "4000+",
     label: "Projects Completed",
     color: "text-[#f97316]",
   },
   {
     icon: Star,
-    value: "500+",
+    value: "3500+",
     label: "Happy Clients",
     color: "text-[#f97316]",
   },
@@ -57,7 +57,7 @@ const stats = [
 const milestones = [
   {
     year: "1999",
-    event: "Bhumi Industrial Founded by Milind Rajhans",
+    event: "Started as FI-ACC Project Finance Consultant",
     icon: Target,
   },
   {
@@ -70,47 +70,56 @@ const milestones = [
     event: "Financial Advisory vertical launched",
     icon: Briefcase,
   },
-  { year: "2015", event: "FI-ACC accreditation received", icon: Award },
+  { year: "2015", 
+    event: "Established Bhumi Industrial Consultant by Milind P. Rajhans",
+    icon: Award },
   {
     year: "2020",
     event: "Expanded services to Pune & Chakan MIDC",
     icon: MapPin,
   },
   {
-    year: "2024",
-    event: "1000+ clients served across Maharashtra",
+    year: "2026",
+    event: "4000+ clients served across Maharashtra",
     icon: Users,
   },
 ];
 
 const team = [
   {
-    name: "Milind Rajhans",
-    role: "Founder & Lead Consultant",
-    qualification: "FI-ACC",
+    name: "Dhanashree Rajhans",
+    role: "Account Manager",
+    // qualification: "FI-ACC",
     experience: "27+ Years",
     image: founderImage, // Add founder image here
-    initial: "M",
+    initial: "D",
   },
   {
-    name: "Rajesh Patil",
-    role: "Senior Industrial Consultant",
-    qualification: "B.E. Civil",
-    experience: "15+ Years",
-    initial: "R",
+    name: "Jayesh Gulve",
+    role: "Finance Executive",
+    // qualification: "B.E. Civil",
+    // experience: "15+ Years",
+    initial: "J",
   },
   {
-    name: "Sneha Deshmukh",
-    role: "Financial Advisor",
-    qualification: "MBA Finance",
-    experience: "12+ Years",
-    initial: "S",
+    name: "Chaitrali Jadhav",
+    role: "Admin Manager",
+    // qualification: "MBA Finance",
+    // experience: "12+ Years",
+    initial: "C",
   },
   {
-    name: "Amol Joshi",
-    role: "MIDC Liaison Expert",
-    qualification: "Dip. Mechanical",
-    experience: "18+ Years",
+    name: "Darshan Lokhande",
+    role: "Finance Executive",
+    // qualification: "Dip. Mechanical",
+    // experience: "18+ Years",
+    initial: "D",
+  },
+  {
+    name: "Aniket Sangale",
+    role: "Finance Executive",
+    // qualification: "Dip. Mechanical",
+    // experience: "18+ Years",
     initial: "A",
   },
 ];
@@ -177,7 +186,7 @@ export default function AboutPage() {
             </h1>
             <p className="text-xl text-[#d9e6f2] max-w-3xl mb-8">
               Led by{" "}
-              <strong className="text-white">Milind Rajhans (FI-ACC)</strong>,
+              <strong className="text-white">Milind P. Rajhans (FI-ACC)</strong>,
               Bhumi Industrial Consultant has been the backbone of industrial
               development across Nashik, Pune, and Chakan since 1999.
             </p>
@@ -232,7 +241,7 @@ export default function AboutPage() {
                 <p className="text-gray-600 mb-4 leading-relaxed">
                   Bhumi Industrial Consultant has been the backbone of
                   industrial development in Nashik, Pune, and Chakan since 1999.
-                  We've successfully handled over 1000+ MIDC projects and
+                  We've successfully handled over 4000+ MIDC projects and
                   financial consultations for businesses of all sizes.
                 </p>
                 <p className="text-gray-600 mb-8 leading-relaxed">
@@ -277,7 +286,7 @@ export default function AboutPage() {
                     <div className="grid grid-cols-2 gap-4">
                       {[
                         ["25+", "MIDC Areas"],
-                        ["₹500Cr+", "Finance Arranged"],
+                        ["₹2000Cr+", "Finance Arranged"],
                         ["100%", "Approval Rate"],
                         ["48hr", "Turnaround"],
                       ].map(([val, lbl], i) => (
@@ -307,7 +316,7 @@ export default function AboutPage() {
                 Our Founder
               </span>
               <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">
-                Meet Milind Rajhans
+                Meet Milind P. Rajhans
               </h2>
             </div>
             <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden">
@@ -316,7 +325,7 @@ export default function AboutPage() {
                 <div className="relative h-full min-h-[400px] bg-gradient-to-br from-[#001a33] to-[#003366] overflow-hidden">
                   <Image
                     src={founderImage}
-                    alt="Milind Rajhans - Founder of Bhumi Industrial Consultant"
+                    alt="Milind P. Rajhans - Founder of Bhumi Industrial Consultant"
                     fill
                     className="object-cover object-center hover:scale-105 transition-transform duration-500"
                     sizes="(max-width: 768px) 100vw, 50vw"
@@ -325,7 +334,7 @@ export default function AboutPage() {
                   />
                   {/* Overlay with name and title */}
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#001a33] to-transparent p-8">
-                    <h3 className="text-3xl font-bold text-white mb-2">Milind Rajhans</h3>
+                    <h3 className="text-3xl font-bold text-white mb-2">Milind P. Rajhans</h3>
                     <p className="text-[#f97316] font-bold text-lg">FI-ACC</p>
                     <p className="text-white/80">Founder & Lead Consultant</p>
                   </div>
@@ -339,10 +348,10 @@ export default function AboutPage() {
                       <span className="text-sm font-semibold text-gray-500">27+ YEARS EXPERIENCE</span>
                     </div>
                     <p className="text-gray-700 mb-4 leading-relaxed">
-                      With over 26 years of hands-on experience, Milind Rajhans
+                      With over 27 years of hands-on experience, Milind P. Rajhans
                       has been instrumental in shaping the industrial landscape of
                       Nashik, Pune, and Chakan. His deep expertise in MIDC
-                      regulations and project finance has helped 500+ businesses
+                      regulations and project finance has helped 3500+ businesses
                       establish and expand successfully.
                     </p>
                     <p className="text-gray-700 mb-6 leading-relaxed">
@@ -356,10 +365,10 @@ export default function AboutPage() {
                   {/* Key Stats */}
                   <div className="grid grid-cols-2 gap-4 mb-6">
                     {[
-                      { label: "Projects", value: "1000+" },
-                      { label: "Clients", value: "500+" },
+                      { label: "Projects", value: "4000+" },
+                      { label: "Clients", value: "3500+" },
                       { label: "MIDC Areas", value: "25+" },
-                      { label: "Finance", value: "₹500Cr+" },
+                      { label: "Finance", value: "₹2000Cr+" },
                     ].map((stat, i) => (
                       <div key={i} className="bg-[#fff7ed] p-3 rounded-xl text-center">
                         <div className="text-xl font-bold text-[#f97316]">{stat.value}</div>
@@ -398,7 +407,7 @@ export default function AboutPage() {
                       href="tel:+919096099960"
                       className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-[#f97316] text-white rounded-xl font-bold hover:bg-[#ea580c] transition-colors"
                     >
-                      <Phone className="w-4 h-4" /> Call Milind Rajhans
+                      <Phone className="w-4 h-4" /> Call Milind P. Rajhans
                     </a>
                     <Link
                       href="/contact"
@@ -428,7 +437,7 @@ export default function AboutPage() {
                 to your project's success
               </p>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
               {team.map((member, i) => (
                 <div
                   key={i}
@@ -443,14 +452,14 @@ export default function AboutPage() {
                   <p className="text-[#f97316] font-semibold text-sm mb-2">
                     {member.role}
                   </p>
-                  <div className="flex justify-center gap-2 flex-wrap">
+                  {/* <div className="flex justify-center gap-2 flex-wrap">
                     <span className="text-xs bg-[#fff7ed] text-[#ea580c] border border-[#ffedd5] rounded px-2 py-1">
                       {member.qualification}
                     </span>
                     <span className="text-xs bg-gray-50 text-gray-600 border border-gray-100 rounded px-2 py-1">
                       {member.experience}
                     </span>
-                  </div>
+                  </div> */}
                 </div>
               ))}
             </div>
@@ -539,8 +548,8 @@ export default function AboutPage() {
               Ready to Work with Nashik's Best Industrial Consultants?
             </h2>
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              Free consultation with Milind Rajhans. 27+ years of expertise,
-              1000+ projects delivered.
+              Free consultation with Milind P. Rajhans. 27+ years of expertise,
+              4000+ projects delivered.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link

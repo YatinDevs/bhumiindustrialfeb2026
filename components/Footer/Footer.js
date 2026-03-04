@@ -73,7 +73,7 @@ export default function Footer() {
   ];
 
   const handleDownloadBrochure = () => {
-    const brochureUrl = "/brochure.pdf";
+    const brochureUrl = "/MPR Brochure - 27 Oct.pdf";
     const link = document.createElement("a");
     link.href = brochureUrl;
     link.download = "Bhumi-Industrial-Consultant-Brochure.pdf";
@@ -90,7 +90,7 @@ export default function Footer() {
           {/* Company Info - UPDATED with correct contact details */}
           <div className="space-y-4" style={{ minHeight: "300px" }}>
             <div className="flex items-center gap-3 mb-4">
-              <div className="relative h-12 w-24">
+              <div className="relative h-16 w-32">
                 <Image
                   src={bhumilogo}
                   alt="Bhumi Industrial Logo"
@@ -102,7 +102,7 @@ export default function Footer() {
                 />
               </div>
               <div className="h-8 w-px bg-white/20"></div>
-              <div className="relative h-10 w-20">
+              <div className="relative h-14 w-28">
                 <Image
                   src={rajhanslogo}
                   alt="Rajhans Logo"

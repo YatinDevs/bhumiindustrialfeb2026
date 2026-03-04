@@ -120,7 +120,7 @@ export default async function ContactLocationPage({ params }) {
             </h1>
             <p className="text-xl text-[#d9e6f2] max-w-2xl">
               {location.isHeadOffice 
-                ? `Talk directly to Milind Rajhans (FI-ACC) at our ${location.city} head office for MIDC approvals, project finance, and all industrial consulting needs.`
+                ? `Talk directly to Milind P. Rajhans (FI-ACC) at our ${location.city} head office for MIDC approvals, project finance, and all industrial consulting needs.`
                 : `Visit our ${location.city} office for expert industrial consulting, MIDC approvals, and financial services.`}
             </p>
             
@@ -142,9 +142,107 @@ export default async function ContactLocationPage({ params }) {
           </div>
         </section>
 
+        {/* ── FORM SECTION (ABOVE CONTACT CARDS) ───────────── */}
+        <section className="py-16 bg-white">
+          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-10">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                Get in Touch with Our {location.city} Team
+              </h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Fill out the form below and we'll get back to you within 2 hours during business hours. 
+                Please mention your specific requirements.
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-8">
+              {/* Left Column - Contact Form */}
+              <div className="bg-[#fff7ed] p-8 rounded-2xl">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Send Us a Message</h3>
+                <p className="text-gray-600 mb-6 text-sm">
+                  Fill in your details and we'll connect you with our {location.city} office team.
+                </p>
+                <ContactFormClient defaultLocation={location.city} />
+              </div>
+
+              {/* Right Column - Quick Info */}
+              <div className="space-y-6">
+                {/* Office Hours Card */}
+                <div className="bg-white border border-gray-200 p-6 rounded-2xl">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Clock className="w-5 h-5 text-[#f97316]" />
+                    <h3 className="font-bold text-gray-900">Office Hours</h3>
+                  </div>
+                  <div className="space-y-2 text-sm">
+                    {location.officeDetails.timings.map((t, i) => (
+                      <div
+                        key={i}
+                        className="flex justify-between text-gray-700 border-b border-gray-100 pb-2 last:border-0"
+                      >
+                        <span>{t.day}</span>
+                        <span className="font-medium">{t.hours}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Quick Contact Card */}
+                <div className="bg-white border border-gray-200 p-6 rounded-2xl">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Phone className="w-5 h-5 text-[#f97316]" />
+                    <h3 className="font-bold text-gray-900">Quick Contact</h3>
+                  </div>
+                  <div className="space-y-3">
+                    {location.contactMethods
+                      .filter(m => m.icon === 'Phone' || m.icon === 'MessageCircle')
+                      .slice(0, 2)
+                      .map((contact, idx) => {
+                        const Icon = IconMap[contact.icon] || Building2;
+                        return (
+                          <a
+                            key={idx}
+                            href={contact.href}
+                            className="flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-[#fff7ed] transition-colors group"
+                          >
+                            <div className="flex items-center gap-3">
+                              <Icon className="w-4 h-4 text-[#f97316]" />
+                              <div>
+                                <p className="text-sm text-gray-500">{contact.title}</p>
+                                <p className="font-semibold text-gray-900 group-hover:text-[#f97316]">
+                                  {contact.value}
+                                </p>
+                              </div>
+                            </div>
+                            <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-[#f97316]" />
+                          </a>
+                        );
+                      })}
+                  </div>
+                </div>
+
+                {/* Address Preview */}
+                <div className="bg-white border border-gray-200 p-6 rounded-2xl">
+                  <div className="flex items-center gap-3 mb-4">
+                    <MapPin className="w-5 h-5 text-[#f97316]" />
+                    <h3 className="font-bold text-gray-900">Address</h3>
+                  </div>
+                  <address className="not-italic text-gray-600 text-sm leading-relaxed">
+                    {location.officeDetails.address[0]}
+                    <br />
+                    {location.officeDetails.address[1]}
+                  </address>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* ── CONTACT CARDS ────────────────────────────────── */}
         <section className="py-12 bg-[#fff7ed]">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">
+              All Contact Methods for {location.name}
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {location.contactMethods.map((m, i) => {
                 const Icon = IconMap[m.icon] || Building2;
@@ -173,176 +271,13 @@ export default async function ContactLocationPage({ params }) {
           </div>
         </section>
 
-        {/* ── FORM + LOCATION DETAILS ───────────────────────── */}
-        <section className="py-16 bg-white">
-          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-5 gap-12">
-              {/* Form (3/5) */}
-              <div className="lg:col-span-3">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                  Send Us a Message
-                </h2>
-                <p className="text-gray-600 mb-8 text-sm">
-                  Fill in your details and we'll call you back within 2 hours
-                  during business hours. Please mention "{location.city} Office" in your message.
-                </p>
-                <ContactFormClient defaultLocation={location.city} />
-              </div>
-
-              {/* Location Details Sidebar (2/5) */}
-              <div className="lg:col-span-2 space-y-6">
-                {/* Office Address Card */}
-                <div className="bg-white border border-gray-200 p-6 rounded-2xl">
-                  <div className="flex items-center gap-3 mb-4">
-                    <MapPin className="w-5 h-5 text-[#f97316]" />
-                    <h3 className="font-bold text-gray-900">Office Address</h3>
-                  </div>
-                  <address className="not-italic text-gray-600 text-sm leading-relaxed mb-4">
-                    {location.officeDetails.address.map((line, i) => (
-                      <span key={i}>
-                        {line}
-                        {i < location.officeDetails.address.length - 1 && <br />}
-                      </span>
-                    ))}
-                  </address>
-                  <a
-                    href={location.officeDetails.mapLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-[#f97316] text-sm font-medium hover:underline"
-                  >
-                    Get Directions <ArrowRight className="w-3 h-3" />
-                  </a>
-                </div>
-
-                {/* Office Hours */}
-                <div className="bg-[#fff7ed] p-6 rounded-2xl">
-                  <div className="flex items-center gap-3 mb-4">
-                    <Clock className="w-5 h-5 text-[#f97316]" />
-                    <h3 className="font-bold text-gray-900">Office Hours</h3>
-                  </div>
-                  <div className="space-y-2 text-sm">
-                    {location.officeDetails.timings.map((t, i) => (
-                      <div
-                        key={i}
-                        className="flex justify-between text-gray-700 border-b border-[#ffedd5] pb-2 last:border-0"
-                      >
-                        <span>{t.day}</span>
-                        <span className="font-medium">{t.hours}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Contact Numbers Card */}
-                <div className="bg-white border border-gray-200 p-6 rounded-2xl">
-                  <div className="flex items-center gap-3 mb-4">
-                    <Phone className="w-5 h-5 text-[#f97316]" />
-                    <h3 className="font-bold text-gray-900">Contact Numbers</h3>
-                  </div>
-                  <div className="space-y-3">
-                    {location.contactMethods
-                      .filter(m => m.icon === 'Phone')
-                      .map((contact, idx) => (
-                        <a
-                          key={idx}
-                          href={contact.href}
-                          className="flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-[#fff7ed] transition-colors group"
-                        >
-                          <div>
-                            <p className="text-sm text-gray-500">{contact.title}</p>
-                            <p className="font-semibold text-gray-900 group-hover:text-[#f97316]">
-                              {contact.value}
-                            </p>
-                          </div>
-                          <Phone className="w-4 h-4 text-gray-400 group-hover:text-[#f97316]" />
-                        </a>
-                      ))}
-                  </div>
-                </div>
-
-                {/* Email Card */}
-                <div className="bg-white border border-gray-200 p-6 rounded-2xl">
-                  <div className="flex items-center gap-3 mb-4">
-                    <Mail className="w-5 h-5 text-[#f97316]" />
-                    <h3 className="font-bold text-gray-900">Email</h3>
-                  </div>
-                  {location.contactMethods
-                    .filter(m => m.icon === 'Mail')
-                    .map((email, idx) => (
-                      <a
-                        key={idx}
-                        href={email.href}
-                        className="flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-[#fff7ed] transition-colors group"
-                      >
-                        <div>
-                          <p className="text-sm text-gray-500">{email.title}</p>
-                          <p className="font-semibold text-gray-900 group-hover:text-[#f97316] break-all">
-                            {email.value}
-                          </p>
-                        </div>
-                        <Mail className="w-4 h-4 text-gray-400 group-hover:text-[#f97316]" />
-                      </a>
-                    ))}
-                </div>
-
-                {/* Expert Card (only show for head office) */}
-                {location.isHeadOffice && (
-                  <div className="bg-gradient-to-br from-[#001a33] to-[#003366] text-white p-7 rounded-2xl">
-                    <div className="flex items-center gap-4 mb-5">
-                      <div className="w-16 h-16 rounded-full bg-[#f97316] flex items-center justify-center text-2xl font-bold flex-shrink-0">
-                        M
-                      </div>
-                      <div>
-                        <h3 className="font-bold text-lg">Milind Rajhans</h3>
-                        <p className="text-[#f97316] font-semibold text-sm">
-                          FI-ACC
-                        </p>
-                        <p className="text-white/60 text-xs">
-                          Founder, 27+ Years Experience
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex gap-1 mb-4">
-                      {[1, 2, 3, 4, 5].map((s) => (
-                        <Star
-                          key={s}
-                          className="w-4 h-4 text-[#f97316] fill-[#f97316]"
-                        />
-                      ))}
-                      <span className="text-white/60 text-sm ml-2">
-                        500+ clients
-                      </span>
-                    </div>
-                    <p className="text-white/70 text-sm mb-5">
-                      Direct consultation with the founder. No juniors, no
-                      callbacks — speak directly with the expert who has handled
-                      1000+ MIDC projects across Maharashtra.
-                    </p>
-                    <div className="space-y-3">
-                      {location.contactMethods
-                        .filter(m => m.icon === 'Phone')
-                        .map((contact, idx) => (
-                          <a
-                            key={idx}
-                            href={contact.href}
-                            className="flex items-center justify-center gap-2 w-full py-3 bg-[#f97316] hover:bg-[#ea580c] rounded-xl font-bold transition-colors text-sm"
-                          >
-                            <Phone className="w-4 h-4" /> {contact.value}
-                          </a>
-                        ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* ── MAP PREVIEW ──────────────────────────────────── */}
-        <section className="py-12 bg-[#fff7ed]">
+        <section className="py-12 bg-white">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-white rounded-2xl overflow-hidden shadow-lg">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+              Find Us at {location.name}
+            </h2>
+            <div className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200">
               <div className="h-[400px] w-full bg-gray-200 relative">
                 <iframe
                   title={`${location.city} Office Location`}
@@ -355,7 +290,145 @@ export default async function ContactLocationPage({ params }) {
                   referrerPolicy="no-referrer-when-downgrade"
                 />
               </div>
+              <div className="p-4 bg-gray-50 flex justify-between items-center">
+                <p className="text-sm text-gray-600">
+                  <MapPin className="w-4 h-4 inline mr-1 text-[#f97316]" />
+                  {location.officeDetails.address.join(', ')}
+                </p>
+                <a
+                  href={location.officeDetails.mapLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-[#f97316] text-sm font-medium hover:underline"
+                >
+                  Get Directions <ArrowRight className="w-3 h-3" />
+                </a>
+              </div>
             </div>
+          </div>
+        </section>
+
+        {/* ── DETAILED INFORMATION SECTION ─────────────────── */}
+        <section className="py-12 bg-[#fff7ed]">
+          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-3 gap-6">
+              {/* Address Card */}
+              <div className="bg-white p-6 rounded-2xl">
+                <div className="flex items-center gap-3 mb-4">
+                  <MapPin className="w-5 h-5 text-[#f97316]" />
+                  <h3 className="font-bold text-gray-900">Complete Address</h3>
+                </div>
+                <address className="not-italic text-gray-600 text-sm leading-relaxed">
+                  {location.officeDetails.address.map((line, i) => (
+                    <span key={i}>
+                      {line}
+                      {i < location.officeDetails.address.length - 1 && <br />}
+                    </span>
+                  ))}
+                </address>
+              </div>
+
+              {/* Contact Numbers Card */}
+              <div className="bg-white p-6 rounded-2xl">
+                <div className="flex items-center gap-3 mb-4">
+                  <Phone className="w-5 h-5 text-[#f97316]" />
+                  <h3 className="font-bold text-gray-900">Contact Numbers</h3>
+                </div>
+                <div className="space-y-3">
+                  {location.contactMethods
+                    .filter(m => m.icon === 'Phone')
+                    .map((contact, idx) => (
+                      <a
+                        key={idx}
+                        href={contact.href}
+                        className="flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-[#fff7ed] transition-colors group"
+                      >
+                        <div>
+                          <p className="text-sm text-gray-500">{contact.title}</p>
+                          <p className="font-semibold text-gray-900 group-hover:text-[#f97316]">
+                            {contact.value}
+                          </p>
+                        </div>
+                        <Phone className="w-4 h-4 text-gray-400 group-hover:text-[#f97316]" />
+                      </a>
+                    ))}
+                </div>
+              </div>
+
+              {/* Email Card */}
+              <div className="bg-white p-6 rounded-2xl">
+                <div className="flex items-center gap-3 mb-4">
+                  <Mail className="w-5 h-5 text-[#f97316]" />
+                  <h3 className="font-bold text-gray-900">Email</h3>
+                </div>
+                {location.contactMethods
+                  .filter(m => m.icon === 'Mail')
+                  .map((email, idx) => (
+                    <a
+                      key={idx}
+                      href={email.href}
+                      className="flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-[#fff7ed] transition-colors group"
+                    >
+                      <div>
+                        <p className="text-sm text-gray-500">{email.title}</p>
+                        <p className="font-semibold text-gray-900 group-hover:text-[#f97316] break-all">
+                          {email.value}
+                        </p>
+                      </div>
+                      <Mail className="w-4 h-4 text-gray-400 group-hover:text-[#f97316]" />
+                    </a>
+                  ))}
+              </div>
+            </div>
+
+            {/* Expert Card (only show for head office) */}
+            {location.isHeadOffice && (
+              <div className="mt-6 bg-gradient-to-br from-[#001a33] to-[#003366] text-white p-7 rounded-2xl">
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="w-16 h-16 rounded-full bg-[#f97316] flex items-center justify-center text-2xl font-bold flex-shrink-0">
+                    M
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg">Milind P. Rajhans</h3>
+                    <p className="text-[#f97316] font-semibold text-sm">
+                      FI-ACC
+                    </p>
+                    <p className="text-white/60 text-xs">
+                      Founder, 27+ Years Experience
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-1 mb-4">
+                  {[1, 2, 3, 4, 5].map((s) => (
+                    <Star
+                      key={s}
+                      className="w-4 h-4 text-[#f97316] fill-[#f97316]"
+                    />
+                  ))}
+                  <span className="text-white/60 text-sm ml-2">
+                    3500+ clients
+                  </span>
+                </div>
+                <p className="text-white/70 text-sm mb-5">
+                  Direct consultation with the founder. No juniors, no
+                  callbacks — speak directly with the expert who has handled
+                  4000+ MIDC projects across Maharashtra.
+                </p>
+                <div className="space-y-3">
+                  {location.contactMethods
+                    .filter(m => m.icon === 'Phone')
+                    .map((contact, idx) => (
+                      <a
+                        key={idx}
+                        href={contact.href}
+                        className="flex items-center justify-center gap-2 w-full py-3 bg-[#f97316] hover:bg-[#ea580c] rounded-xl font-bold transition-colors text-sm"
+                      >
+                        <Phone className="w-4 h-4" /> {contact.value}
+                      </a>
+                    ))}
+                </div>
+              </div>
+            )}
           </div>
         </section>
 
