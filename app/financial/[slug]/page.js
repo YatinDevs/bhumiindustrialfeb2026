@@ -30,6 +30,7 @@ import {
 } from "@/utils/seoConfig";
 import SeoWrapper from "@/components/SeoWrapper/SeoWrapper";
 import { getFinancialServiceData } from "@/lib/data";
+import axiosInstance from "@/services/api";
 
 export async function generateStaticParams() {
   return Object.keys(financialServices).map((slug) => ({ slug }));
@@ -68,6 +69,20 @@ export async function generateMetadata({ params }) {
       description: service.description,
     },
   };
+}
+
+// Fetch contact data only
+async function getContactData() {
+  try {
+    const response = await axiosInstance.get('/contact');
+    if (response.data.success) {
+      return response.data.data;
+    }
+    return null;
+  } catch (error) {
+    console.error('Error fetching contact data:', error);
+    return null;
+  }
 }
 
 // Rich content data from first version
@@ -598,12 +613,12 @@ const defaultContent = {
     {
       question: "Why choose Bhumi Industrial Consultant?",
       answer:
-        "With 27+ years of experience, FI-ACC accreditation, and 4000+ successful projects, Milind P. Rajhans personally handles each case for the best outcome. Call us at +91 90960 99960 or +91 98223 72070 for a free consultation.",
+        "With 27+ years of experience, FI-ACC accreditation, and 4000+ successful projects, Milind P. Rajhans personally handles each case for the best outcome. Call us for a free consultation.",
     },
     {
       question: "Is the first consultation free?",
       answer:
-        "Yes, the first consultation is completely free. Call +91 90960 99960 or +91 98223 72070, or visit our office at Flat-B2, Parshuram Apartment, College Road, Nashik.",
+        "Yes, the first consultation is completely free. Call us or visit our office at Flat-B2, Parshuram Apartment, College Road, Nashik.",
     },
   ],
 };
@@ -612,6 +627,15 @@ export default async function FinancialServicePage({ params }) {
   const { slug } = await params; // ✅ Next.js 15 fix
   const seoData = financialServices[slug];
   if (!seoData) notFound();
+
+  // Fetch only contact data
+  const contactData = await getContactData();
+
+  // Get contact info with fallbacks
+  const primaryPhone = contactData?.primary_phone || "+91 90960 99960";
+  const secondaryPhone = contactData?.secondary_phone || "+91 98223 72070";
+  const primaryEmail = contactData?.primary_email || "info@bhumiindustrial.com";
+  const whatsappNumber = contactData?.whatsapp_number || "+91 90960 99960";
 
   // Try to get data from API, fallback to static content
   let serviceData;
@@ -640,32 +664,32 @@ export default async function FinancialServicePage({ params }) {
 
   const whyChooseItems = [
     {
-      icon: <Clock className="w-8 h-8" />,
+      icon: <Clock className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8" />,
       title: "27+ Years Experience",
       desc: "Decades of expertise in financial consulting for industrial units.",
     },
     {
-      icon: <Users className="w-8 h-8" />,
+      icon: <Users className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8" />,
       title: "Expert Team",
       desc: "Led by Milind P. Rajhans, FI-ACC certified consultant.",
     },
     {
-      icon: <FileText className="w-8 h-8" />,
+      icon: <FileText className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8" />,
       title: "4000+ projects",
       desc: "Proven track record with successful project completions.",
     },
     {
-      icon: <Briefcase className="w-8 h-8" />,
+      icon: <Briefcase className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8" />,
       title: "PAN India Network",
       desc: "Strong relationships with banks and financial institutions.",
     },
     {
-      icon: <Target className="w-8 h-8" />,
+      icon: <Target className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8" />,
       title: "High Success Rate",
       desc: "95% loan approval rate for our clients.",
     },
     {
-      icon: <Award className="w-8 h-8" />,
+      icon: <Award className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8" />,
       title: "FI-ACC Accredited",
       desc: "Recognized by ICAI for financial consulting excellence.",
     },
@@ -674,19 +698,19 @@ export default async function FinancialServicePage({ params }) {
   return (
     <SeoWrapper pageUrl={`/financial/${slug}`} schemas={schemas}>
       <main>
-        {/* Hero Section - Premium Gradient from First Version */}
-        <section className="relative bg-gradient-to-br from-[#001a33] via-[#002952] to-[#003d66] text-white py-20 overflow-hidden">
+        {/* Hero Section - Premium Gradient */}
+        <section className="relative bg-gradient-to-br from-[#001a33] via-[#002952] to-[#003d66] text-white py-12 sm:py-16 lg:py-20 overflow-hidden">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#f97316] rounded-full blur-3xl"></div>
+            <div className="absolute top-0 left-0 w-48 sm:w-72 lg:w-96 h-48 sm:h-72 lg:h-96 bg-white rounded-full blur-2xl sm:blur-3xl"></div>
+            <div className="absolute bottom-0 right-0 w-48 sm:w-72 lg:w-96 h-48 sm:h-72 lg:h-96 bg-[#f97316] rounded-full blur-2xl sm:blur-3xl"></div>
           </div>
 
-          <div className="relative max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Breadcrumb */}
             <nav
               aria-label="Breadcrumb"
-              className="flex items-center gap-2 text-sm text-white/50 mb-6 flex-wrap"
+              className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-white/50 mb-4 sm:mb-6 flex-wrap"
             >
               <Link href="/" className="hover:text-white transition-colors">
                 Home
@@ -703,57 +727,57 @@ export default async function FinancialServicePage({ params }) {
             </nav>
 
             {/* Category Badge */}
-            <span className="inline-block px-4 py-2 bg-[#f97316]/20 text-[#fb923c] rounded-full text-sm font-semibold mb-4">
+            <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-[#f97316]/20 text-[#fb923c] rounded-full text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
               Financial Service · Maharashtra
             </span>
 
             {/* Title and Description */}
             <div className="max-w-3xl">
-              <h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 lg:mb-6 leading-tight">
                 {serviceName}
               </h1>
-              <p className="text-xl text-[#d9e6f2] mb-8">{content.intro}</p>
+              <p className="text-sm sm:text-base lg:text-xl text-[#d9e6f2] mb-4 sm:mb-6 lg:mb-8">{content.intro}</p>
 
-              {/* CTA Buttons - UPDATED with correct phone numbers */}
-              <div className="flex flex-wrap gap-4">
+              {/* Hero CTA Buttons - Always side by side */}
+              <div className="flex flex-col xs:flex-row gap-3 sm:gap-4">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-[#f97316] hover:bg-[#ea580c] text-white rounded-xl font-bold transition-all group shadow-lg shadow-[#f97316]/25"
+                  className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-5 lg:px-8 py-2.5 sm:py-3 lg:py-4 bg-[#f97316] hover:bg-[#ea580c] text-white rounded-lg sm:rounded-xl font-bold transition-all group shadow-lg text-xs sm:text-sm lg:text-base whitespace-nowrap"
                 >
                   Get Free Consultation
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform hidden sm:inline" />
                 </Link>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-row flex-nowrap gap-2 sm:gap-3">
                   <a
-                    href="tel:+919096099960"
-                    className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 hover:bg-white/20 text-white rounded-xl font-bold transition-colors border border-white/20"
+                    href={`tel:${primaryPhone.replace(/\s+/g, '')}`}
+                    className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 lg:px-4 py-2.5 sm:py-3 lg:py-4 bg-white/10 hover:bg-white/20 text-white rounded-lg sm:rounded-xl font-bold transition-colors border border-white/20 text-[11px] xs:text-xs sm:text-sm lg:text-base whitespace-nowrap min-h-[44px]"
                   >
-                    <Phone className="w-5 h-5" />
-                    +91 90960 99960
+                    <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+                    <span className="truncate max-w-[70px] xs:max-w-[90px] sm:max-w-none">{primaryPhone}</span>
                   </a>
                   <a
-                    href="tel:+919822372070"
-                    className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 hover:bg-white/20 text-white rounded-xl font-bold transition-colors border border-white/20"
+                    href={`tel:${secondaryPhone.replace(/\s+/g, '')}`}
+                    className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 lg:px-4 py-2.5 sm:py-3 lg:py-4 bg-white/10 hover:bg-white/20 text-white rounded-lg sm:rounded-xl font-bold transition-colors border border-white/20 text-[11px] xs:text-xs sm:text-sm lg:text-base whitespace-nowrap min-h-[44px]"
                   >
-                    <Phone className="w-5 h-5" />
-                    +91 98223 72070
+                    <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+                    <span className="truncate max-w-[70px] xs:max-w-[90px] sm:max-w-none">{secondaryPhone}</span>
                   </a>
                 </div>
               </div>
 
-              {/* Contact Info Strip */}
-              <div className="flex flex-wrap items-center gap-4 mt-6 pt-4 border-t border-white/20">
+              {/* Contact Info Strip - with dynamic email */}
+              <div className="flex flex-col xs:flex-row items-start xs:items-center gap-2 xs:gap-4 mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-white/20">
                 <a
-                  href="mailto:info@bhumiindustrial.com"
-                  className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
+                  href={`mailto:${primaryEmail}`}
+                  className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-white/70 hover:text-white transition-colors"
                 >
-                  <Mail className="w-4 h-4" />
-                  info@bhumiindustrial.com
+                  <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  <span className="truncate max-w-[180px] xs:max-w-none">{primaryEmail}</span>
                 </a>
-                <span className="text-white/30">|</span>
-                <span className="flex items-center gap-2 text-sm text-white/70">
-                  <MapPin className="w-4 h-4" />
-                  Nashik | Mumbai | Pune | Nagpur
+                <span className="hidden xs:inline text-white/30">|</span>
+                <span className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-white/70">
+                  <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  <span>Nashik | Mumbai | Pune | Nagpur</span>
                 </span>
               </div>
             </div>
@@ -761,30 +785,30 @@ export default async function FinancialServicePage({ params }) {
         </section>
 
         {/* Main Content Section */}
-        <section className="py-20 bg-white">
-          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-3 gap-12">
+        <section className="py-12 sm:py-16 lg:py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
               {/* Left Column - Main Content */}
               <div className="lg:col-span-2">
-                <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-4 sm:mb-6">
                   Complete {serviceName} Services
                 </h2>
-                <p className="text-gray-600 text-lg mb-8 leading-relaxed">
+                <p className="text-sm sm:text-base lg:text-lg text-gray-600 mb-6 sm:mb-8 leading-relaxed">
                   {serviceData?.detailedDesc || seoData.description}
                 </p>
 
                 {/* Features Grid */}
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">
+                <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
                   What We Offer
                 </h3>
-                <div className="grid sm:grid-cols-2 gap-4 mb-12">
+                <div className="grid sm:grid-cols-2 gap-3 sm:gap-4 mb-8 sm:mb-12">
                   {content.features.map((feature, i) => (
                     <div
                       key={i}
-                      className="flex items-start gap-3 p-4 bg-[#fff7ed] rounded-xl hover:shadow-md transition-shadow"
+                      className="flex items-start gap-2 sm:gap-3 p-3 sm:p-4 bg-[#fff7ed] rounded-lg sm:rounded-xl hover:shadow-md transition-shadow"
                     >
-                      <CheckCircle className="w-5 h-5 text-[#f97316] flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-800 font-medium">
+                      <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-[#f97316] flex-shrink-0 mt-0.5" />
+                      <span className="text-xs sm:text-sm text-gray-800 font-medium">
                         {feature}
                       </span>
                     </div>
@@ -792,24 +816,24 @@ export default async function FinancialServicePage({ params }) {
                 </div>
 
                 {/* Benefits/Why Choose Us Section */}
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">
+                <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
                   Why Choose Our {serviceName}?
                 </h3>
-                <div className="space-y-4 mb-12">
+                <div className="space-y-3 sm:space-y-4 mb-8 sm:mb-12">
                   {(content.benefits || defaultContent.benefits).map(
                     (benefit, index) => (
                       <div
                         key={index}
-                        className="flex gap-4 p-6 bg-[#fff7ed] rounded-xl hover:shadow-md transition-shadow"
+                        className="flex gap-3 sm:gap-4 p-4 sm:p-5 lg:p-6 bg-[#fff7ed] rounded-lg sm:rounded-xl hover:shadow-md transition-shadow"
                       >
-                        <div className="w-12 h-12 bg-[#f97316] rounded-lg flex items-center justify-center text-white font-bold text-xl flex-shrink-0">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-[#f97316] rounded-lg flex items-center justify-center text-white font-bold text-base sm:text-lg lg:text-xl flex-shrink-0">
                           {index + 1}
                         </div>
                         <div>
-                          <h4 className="text-xl font-bold text-gray-900 mb-2">
+                          <h4 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 mb-1 sm:mb-2">
                             {benefit.title}
                           </h4>
-                          <p className="text-gray-600">{benefit.desc}</p>
+                          <p className="text-xs sm:text-sm text-gray-600">{benefit.desc}</p>
                         </div>
                       </div>
                     ),
@@ -817,107 +841,107 @@ export default async function FinancialServicePage({ params }) {
                 </div>
 
                 {/* Description Highlight */}
-                <div className="bg-gradient-to-r from-[#fff7ed] to-transparent border-l-4 border-[#f97316] p-6 rounded-r-xl">
-                  <p className="text-gray-700 text-lg italic leading-relaxed">
+                <div className="bg-gradient-to-r from-[#fff7ed] to-transparent border-l-4 border-[#f97316] p-4 sm:p-5 lg:p-6 rounded-r-xl">
+                  <p className="text-sm sm:text-base lg:text-lg text-gray-700 italic leading-relaxed">
                     "{seoData.description}"
                   </p>
                 </div>
               </div>
 
-              {/* Right Column - Sidebar - UPDATED with correct contact numbers */}
+              {/* Right Column - Sidebar - with dynamic contact data */}
               <div className="lg:col-span-1">
                 {/* Founder Card - Sticky with proper spacing */}
-                <div className="sticky top-24 space-y-6">
+                <div className="sticky top-24 space-y-4 sm:space-y-6">
                   {/* Founder Card */}
-                  <div className="bg-gradient-to-br from-[#001a33] to-[#003366] text-white p-6 rounded-2xl shadow-xl">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-14 h-14 rounded-full bg-[#f97316] flex items-center justify-center text-2xl font-bold flex-shrink-0">
+                  <div className="bg-gradient-to-br from-[#001a33] to-[#003366] text-white p-4 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl shadow-xl">
+                    <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full bg-[#f97316] flex items-center justify-center text-lg sm:text-xl lg:text-2xl font-bold flex-shrink-0">
                         M
                       </div>
                       <div>
-                        <p className="font-bold text-lg">Milind P. Rajhans</p>
-                        <p className="text-[#f97316] text-sm font-semibold">
-                          FI-ACC · 27+ Years Experience
+                        <p className="font-bold text-sm sm:text-base lg:text-lg">Milind P. Rajhans</p>
+                        <p className="text-[#f97316] text-xs sm:text-sm font-semibold">
+                          FI-ACC · 27+ Years
                         </p>
                       </div>
                     </div>
-                    <p className="text-white/80 text-sm mb-6">
+                    <p className="text-white/80 text-xs sm:text-sm mb-4 sm:mb-6">
                       Free first consultation. Direct access to the founder — no
                       juniors, no callbacks. Personally handling each case for
                       the best outcome.
                     </p>
 
-                    {/* Contact Options - UPDATED */}
-                    <div className="space-y-3">
+                    {/* Contact Options - with dynamic data */}
+                    <div className="space-y-2 sm:space-y-3">
                       <a
-                        href="tel:+919096099960"
-                        className="flex items-center gap-3 p-4 bg-[#f97316] rounded-xl hover:bg-[#ea580c] transition-colors font-bold group"
+                        href={`tel:${primaryPhone.replace(/\s+/g, '')}`}
+                        className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-[#f97316] rounded-lg sm:rounded-xl hover:bg-[#ea580c] transition-colors font-bold group text-xs sm:text-sm"
                       >
-                        <Phone className="w-5 h-5" />
-                        Primary: +91 90960 99960
-                        <ArrowRight className="w-4 h-4 ml-auto group-hover:translate-x-1 transition-transform" />
+                        <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+                        <span className="truncate max-w-[100px] xs:max-w-[120px] sm:max-w-none">Primary: {primaryPhone}</span>
+                        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-auto group-hover:translate-x-1 transition-transform flex-shrink-0" />
                       </a>
 
                       <a
-                        href="tel:+919822372070"
-                        className="flex items-center gap-3 p-4 bg-[#f97316]/80 rounded-xl hover:bg-[#ea580c] transition-colors font-bold group"
+                        href={`tel:${secondaryPhone.replace(/\s+/g, '')}`}
+                        className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-[#f97316]/80 rounded-lg sm:rounded-xl hover:bg-[#ea580c] transition-colors font-bold group text-xs sm:text-sm"
                       >
-                        <Phone className="w-5 h-5" />
-                        Alternate: +91 98223 72070
-                        <ArrowRight className="w-4 h-4 ml-auto group-hover:translate-x-1 transition-transform" />
+                        <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+                        <span className="truncate max-w-[100px] xs:max-w-[120px] sm:max-w-none">Alt: {secondaryPhone}</span>
+                        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-auto group-hover:translate-x-1 transition-transform flex-shrink-0" />
                       </a>
 
                       <a
-                        href={`https://wa.me/919096099960?text=Hi%20Milind%20sir%2C%20I%20need%20help%20with%20${encodeURIComponent(seoData.breadcrumb)}`}
+                        href={`https://wa.me/${whatsappNumber.replace(/\s+/g, '')}?text=Hi%20Milind%20sir%2C%20I%20need%20help%20with%20${encodeURIComponent(seoData.breadcrumb)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-3 p-4 bg-[#25D366] rounded-xl hover:bg-[#20ba57] transition-colors font-bold group"
+                        className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-[#25D366] rounded-lg sm:rounded-xl hover:bg-[#20ba57] transition-colors font-bold group text-xs sm:text-sm"
                       >
-                        <MessageCircle className="w-5 h-5" />
+                        <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5" />
                         WhatsApp Us
-                        <ArrowRight className="w-4 h-4 ml-auto group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-auto group-hover:translate-x-1 transition-transform flex-shrink-0" />
                       </a>
 
                       <Link
                         href="/contact"
-                        className="flex items-center gap-3 p-4 bg-white/10 hover:bg-white/20 rounded-xl transition-colors font-bold group"
+                        className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-white/10 hover:bg-white/20 rounded-lg sm:rounded-xl transition-colors font-bold group text-xs sm:text-sm"
                       >
-                        <FileText className="w-5 h-5" />
+                        <FileText className="w-4 h-4 sm:w-5 sm:h-5" />
                         Send Enquiry
-                        <ArrowRight className="w-4 h-4 ml-auto group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-auto group-hover:translate-x-1 transition-transform flex-shrink-0" />
                       </Link>
                     </div>
 
-                    {/* Email Contact */}
-                    <div className="mt-4 pt-4 border-t border-white/20">
+                    {/* Email Contact - with dynamic email */}
+                    <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-white/20">
                       <a
-                        href="mailto:info@bhumiindustrial.com"
-                        className="flex items-center gap-2 text-white/70 hover:text-white transition-colors text-sm"
+                        href={`mailto:${primaryEmail}`}
+                        className="flex items-center gap-1.5 sm:gap-2 text-white/70 hover:text-white transition-colors text-xs sm:text-sm"
                       >
-                        <Mail className="w-4 h-4" />
-                        info@bhumiindustrial.com
+                        <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                        <span className="truncate">{primaryEmail}</span>
                       </a>
                     </div>
                   </div>
 
-                  {/* Related Services - Now properly separated */}
-                  <div className="bg-white border border-[#ffedd5] p-6 rounded-2xl">
-                    <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                      <Briefcase className="w-5 h-5 text-[#f97316]" />
+                  {/* Related Services */}
+                  <div className="bg-white border border-[#ffedd5] p-4 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl">
+                    <h3 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
+                      <Briefcase className="w-4 h-4 sm:w-5 sm:h-5 text-[#f97316]" />
                       Related Services
                     </h3>
-                    <ul className="space-y-3">
+                    <ul className="space-y-2 sm:space-y-3">
                       {related.map(([s, data]) => (
                         <li key={s}>
                           <Link
                             href={`/financial/${s}`}
-                            className="flex items-center gap-2 text-gray-600 hover:text-[#f97316] transition-colors group py-2 border-b border-[#ffedd5] last:border-0"
+                            className="flex items-center gap-1.5 sm:gap-2 text-gray-600 hover:text-[#f97316] transition-colors group py-1.5 sm:py-2 border-b border-[#ffedd5] last:border-0 text-xs sm:text-sm"
                           >
                             <ArrowRight
-                              size={14}
-                              className="group-hover:translate-x-1 transition-transform text-[#f97316]"
+                              size={12}
+                              className="sm:w-3.5 sm:h-3.5 group-hover:translate-x-1 transition-transform text-[#f97316]"
                             />
-                            <span className="font-medium">
+                            <span className="font-medium truncate">
                               {data.breadcrumb}
                             </span>
                           </Link>
@@ -926,9 +950,9 @@ export default async function FinancialServicePage({ params }) {
                     </ul>
                     <Link
                       href="/financial"
-                      className="mt-4 inline-flex items-center gap-2 text-[#f97316] hover:text-[#ea580c] font-semibold text-sm"
+                      className="mt-3 sm:mt-4 inline-flex items-center gap-1 sm:gap-2 text-[#f97316] hover:text-[#ea580c] font-semibold text-xs sm:text-sm"
                     >
-                      View All Services <ArrowRight className="w-4 h-4" />
+                      View All Services <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
                     </Link>
                   </div>
                 </div>
@@ -938,56 +962,56 @@ export default async function FinancialServicePage({ params }) {
         </section>
 
         {/* Why Choose Us Section - Grid */}
-        <section className="py-20 bg-[#fff7ed]">
-          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl lg:text-4xl font-bold text-center text-gray-900 mb-4">
+        <section className="py-12 sm:py-16 lg:py-20 bg-[#fff7ed]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-center text-gray-900 mb-2 sm:mb-3 lg:mb-4">
               Why Choose Bhumi Financial?
             </h2>
-            <p className="text-xl text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base lg:text-lg text-gray-600 text-center mb-6 sm:mb-8 lg:mb-12 max-w-2xl mx-auto">
               Experience the difference with our expert financial consulting
               services
             </p>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
               {whyChooseItems.map((item, index) => (
                 <div
                   key={index}
-                  className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all group"
+                  className="bg-white p-5 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all group"
                 >
-                  <div className="text-[#f97316] mb-4 bg-[#fff7ed] w-16 h-16 rounded-xl flex items-center justify-center group-hover:bg-[#f97316] group-hover:text-white transition-all">
+                  <div className="text-[#f97316] mb-3 sm:mb-4 bg-[#fff7ed] w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-lg sm:rounded-xl flex items-center justify-center group-hover:bg-[#f97316] group-hover:text-white transition-all">
                     {item.icon}
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                  <h3 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 mb-1 sm:mb-2">
                     {item.title}
                   </h3>
-                  <p className="text-gray-600">{item.desc}</p>
+                  <p className="text-xs sm:text-sm text-gray-600">{item.desc}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* FAQ Section - UPDATED with correct contact numbers */}
-        <section className="py-20 bg-white">
-          <div className="max-w-4xl mx-auto px-4">
-            <h2 className="text-3xl lg:text-4xl font-bold text-center text-gray-900 mb-4">
+        {/* FAQ Section - with dynamic contact numbers */}
+        <section className="py-12 sm:py-16 lg:py-20 bg-white">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-center text-gray-900 mb-2 sm:mb-3 lg:mb-4">
               Frequently Asked Questions
             </h2>
-            <p className="text-xl text-gray-600 text-center mb-12">
+            <p className="text-sm sm:text-base lg:text-lg text-gray-600 text-center mb-6 sm:mb-8 lg:mb-12">
               Get answers to common questions about {serviceName}
             </p>
 
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {content.faqs.map((faq, i) => (
                 <div
                   key={i}
-                  className="bg-[#fff7ed] p-6 rounded-2xl hover:shadow-md transition-shadow border border-[#ffedd5]"
+                  className="bg-[#fff7ed] p-4 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl hover:shadow-md transition-shadow border border-[#ffedd5]"
                 >
-                  <h3 className="font-bold text-gray-900 mb-3 text-lg flex items-start gap-2">
-                    <span className="text-[#f97316] mt-1">Q:</span>
+                  <h3 className="font-bold text-gray-900 mb-2 sm:mb-3 text-sm sm:text-base lg:text-lg flex items-start gap-2">
+                    <span className="text-[#f97316] mt-0.5">Q:</span>
                     <span>{faq.question}</span>
                   </h3>
-                  <p className="text-gray-600 pl-6 leading-relaxed">
+                  <p className="text-gray-600 text-xs sm:text-sm leading-relaxed pl-5 sm:pl-6">
                     <span className="text-[#f97316] font-bold mr-2">A:</span>
                     {faq.answer}
                   </p>
@@ -995,96 +1019,99 @@ export default async function FinancialServicePage({ params }) {
               ))}
             </div>
 
-            {/* Still Have Questions? */}
-            <div className="mt-8 p-6 bg-gradient-to-r from-[#f97316]/10 to-[#fff7ed] rounded-2xl text-center">
-              <h3 className="text-lg font-bold text-gray-900 mb-2">
+            {/* Still Have Questions? - with dynamic contact numbers */}
+            <div className="mt-6 sm:mt-8 p-4 sm:p-5 lg:p-6 bg-gradient-to-r from-[#f97316]/10 to-[#fff7ed] rounded-xl sm:rounded-2xl text-center">
+              <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-1 sm:mb-2">
                 Still have questions?
               </h3>
-              <p className="text-gray-600 mb-4">
+              <p className="text-xs sm:text-sm text-gray-600 mb-3 sm:mb-4">
                 Call us directly for personalized assistance
               </p>
-              <div className="flex flex-wrap gap-3 justify-center">
+              <div className="flex flex-row flex-nowrap gap-2 sm:gap-3 justify-center max-w-[280px] xs:max-w-sm mx-auto">
                 <a
-                  href="tel:+919096099960"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#f97316] text-white rounded-lg font-medium hover:bg-[#ea580c] transition-colors"
+                  href={`tel:${primaryPhone.replace(/\s+/g, '')}`}
+                  className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-2 sm:py-2.5 bg-[#f97316] text-white rounded-lg sm:rounded-xl font-medium hover:bg-[#ea580c] transition-colors text-[11px] xs:text-xs sm:text-sm whitespace-nowrap min-h-[44px]"
                 >
-                  <Phone className="w-4 h-4" />
-                  +91 90960 99960
+                  <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+                  <span className="truncate max-w-[60px] xs:max-w-[80px] sm:max-w-none">{primaryPhone}</span>
                 </a>
                 <a
-                  href="tel:+919822372070"
-                  className="inline-flex items-center gap-2 px-4 py-2 border border-[#f97316] text-[#f97316] rounded-lg font-medium hover:bg-[#f97316] hover:text-white transition-colors"
+                  href={`tel:${secondaryPhone.replace(/\s+/g, '')}`}
+                  className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-2 sm:py-2.5 border border-[#f97316] text-[#f97316] rounded-lg sm:rounded-xl font-medium hover:bg-[#f97316] hover:text-white transition-colors text-[11px] xs:text-xs sm:text-sm whitespace-nowrap min-h-[44px]"
                 >
-                  <Phone className="w-4 h-4" />
-                  +91 98223 72070
+                  <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+                  <span className="truncate max-w-[60px] xs:max-w-[80px] sm:max-w-none">{secondaryPhone}</span>
                 </a>
               </div>
             </div>
           </div>
         </section>
 
-        {/* CTA Section - UPDATED with correct contact numbers */}
-        <section className="py-20 bg-gradient-to-br from-[#001a33] via-[#002952] to-[#003d66] text-white">
-          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6">
+        {/* CTA Section - with dynamic contact numbers */}
+        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-[#001a33] via-[#002952] to-[#003d66] text-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold mb-3 sm:mb-4 lg:mb-6">
               Ready to Get Started with {serviceName}?
             </h2>
-            <p className="text-xl text-[#d9e6f2] mb-8 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base lg:text-lg text-[#d9e6f2] mb-4 sm:mb-6 lg:mb-8 max-w-2xl mx-auto">
               Get expert guidance from our team. We'll help you secure the best
               financial solutions for your industrial unit.
             </p>
-            <div className="flex flex-wrap gap-4 justify-center">
+            
+            {/* CTA Buttons - Always side by side */}
+            <div className="flex flex-col xs:flex-row gap-3 sm:gap-4 justify-center">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-[#f97316] hover:bg-[#ea580c] text-white rounded-xl font-bold text-lg transition-all group shadow-lg shadow-[#f97316]/25"
+                className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-5 lg:px-8 py-2.5 sm:py-3 lg:py-4 bg-[#f97316] hover:bg-[#ea580c] text-white rounded-lg sm:rounded-xl font-bold text-xs sm:text-sm lg:text-base transition-all group shadow-lg whitespace-nowrap"
               >
                 Get Free Consultation
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform hidden sm:inline" />
               </Link>
-              <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex flex-row flex-nowrap gap-2 sm:gap-3">
                 <a
-                  href="tel:+919096099960"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 hover:bg-white/20 text-white rounded-xl font-bold text-lg transition-colors border border-white/20"
+                  href={`tel:${primaryPhone.replace(/\s+/g, '')}`}
+                  className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 lg:px-4 py-2.5 sm:py-3 lg:py-4 bg-white/10 hover:bg-white/20 text-white rounded-lg sm:rounded-xl font-bold transition-colors border border-white/20 text-[11px] xs:text-xs sm:text-sm lg:text-base whitespace-nowrap min-h-[44px]"
                 >
-                  <Phone className="w-5 h-5" />
-                  +91 90960 99960
+                  <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+                  <span className="truncate max-w-[70px] xs:max-w-[90px] sm:max-w-none">{primaryPhone}</span>
                 </a>
                 <a
-                  href="tel:+919822372070"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 hover:bg-white/20 text-white rounded-xl font-bold text-lg transition-colors border border-white/20"
+                  href={`tel:${secondaryPhone.replace(/\s+/g, '')}`}
+                  className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 lg:px-4 py-2.5 sm:py-3 lg:py-4 bg-white/10 hover:bg-white/20 text-white rounded-lg sm:rounded-xl font-bold transition-colors border border-white/20 text-[11px] xs:text-xs sm:text-sm lg:text-base whitespace-nowrap min-h-[44px]"
                 >
-                  <Phone className="w-5 h-5" />
-                  +91 98223 72070
+                  <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+                  <span className="truncate max-w-[70px] xs:max-w-[90px] sm:max-w-none">{secondaryPhone}</span>
                 </a>
               </div>
             </div>
-            <p className="text-white/60 text-sm mt-6">
+            
+            <p className="text-white/60 text-xs sm:text-sm mt-4 sm:mt-6">
               Offices in Nashik, Mumbai, Pune & Nagpur | Response within 2 hours
             </p>
           </div>
         </section>
 
         {/* Related Services Navigation */}
-        <section className="py-12 bg-white border-t border-[#ffedd5]">
-          <div className="max-w-[1440px] mx-auto px-4">
-            <h2 className="text-xl font-bold text-gray-900 mb-6 text-center">
+        <section className="py-8 sm:py-12 bg-white border-t border-[#ffedd5]">
+          <div className="max-w-7xl mx-auto px-4">
+            <h2 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 mb-4 sm:mb-6 text-center">
               Explore Other Financial Services
             </h2>
-            <div className="flex flex-wrap justify-center gap-3">
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
               {related.map(([s, data]) => (
                 <Link
                   key={s}
                   href={`/financial/${s}`}
-                  className="px-4 py-2 bg-[#fff7ed] border border-[#ffedd5] text-[#ea580c] rounded-lg text-sm font-medium hover:bg-[#f97316] hover:text-white hover:border-[#f97316] transition-all"
+                  className="px-3 sm:px-4 py-1.5 sm:py-2 bg-[#fff7ed] border border-[#ffedd5] text-[#ea580c] rounded-lg text-[10px] sm:text-xs font-medium hover:bg-[#f97316] hover:text-white hover:border-[#f97316] transition-all"
                 >
                   {data.breadcrumb}
                 </Link>
               ))}
               <Link
                 href="/financial"
-                className="px-4 py-2 bg-[#f97316] text-white rounded-lg text-sm font-medium hover:bg-[#ea580c] transition-colors"
+                className="px-3 sm:px-4 py-1.5 sm:py-2 bg-[#f97316] text-white rounded-lg text-[10px] sm:text-xs font-medium hover:bg-[#ea580c] transition-colors"
               >
-                View All Services →
+                View All →
               </Link>
             </div>
           </div>

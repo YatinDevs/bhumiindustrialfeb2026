@@ -11,6 +11,11 @@ const nextConfig = {
       { protocol: "https", hostname: "bhumiindustrial.com", pathname: "/**" },
       { protocol: "https", hostname: "images.unsplash.com", pathname: "/**" },
       { protocol: "https", hostname: "*.midcindia.org", pathname: "/**" },
+      // Add localhost for development
+      { protocol: "http", hostname: "127.0.0.1", pathname: "/**" },
+      { protocol: "http", hostname: "localhost", pathname: "/**" },
+      // Add your server domain
+      { protocol: "https", hostname: "server.bhumiindustrial.com", pathname: "/**" },
     ],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],

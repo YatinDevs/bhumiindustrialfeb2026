@@ -1,3 +1,4 @@
+// components/Navbar.jsx
 "use client";
 import Link from "next/link";
 import Image from "next/image";
@@ -27,13 +28,46 @@ import {
   PiggyBank,
 } from "lucide-react";
 import { bhumilogo, rajhanslogo } from "../../assets";
+import axiosInstance from "@/services/api";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [activeMegaMenu, setActiveMegaMenu] = useState(null);
+  const [contactInfo, setContactInfo] = useState(null);
+  const [offices, setOffices] = useState([]);
+  const [loading, setLoading] = useState(true);
   const closeTimeout = useRef(null);
+
+  useEffect(() => {
+    fetchContactData();
+    fetchOfficeLocations();
+  }, []);
+
+  const fetchContactData = async () => {
+    try {
+      const response = await axiosInstance.get('/contact');
+      if (response.data.success) {
+        setContactInfo(response.data.data);
+      }
+    } catch (error) {
+      console.error('Error fetching contact info:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchOfficeLocations = async () => {
+    try {
+      const response = await axiosInstance.get('/offices');
+      if (response.data.success) {
+        setOffices(response.data.data);
+      }
+    } catch (error) {
+      console.error('Error fetching office locations:', error);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -70,9 +104,9 @@ export default function Navbar() {
   };
 
   const quickLinks = [
-    { label: "Careers", href: "/careers" },
-    { label: "Blog", href: "/blog" },
-    { label: "Testimonials", href: "/testimonials" },
+    { label: "Careers", href: "/careers", icon: <Briefcase size={14} /> },
+    // { label: "Blog", href: "/blog", icon: <FileText size={14} /> },
+    // { label: "Testimonials", href: "/testimonials", icon: <User size={14} /> },
   ];
 
   // Industrial Services with Icons
@@ -258,140 +292,192 @@ export default function Navbar() {
     document.body.removeChild(link);
   };
 
+  // Get primary phone from contact info or use fallback
+  const primaryPhone = contactInfo?.primary_phone || "+91 90960 99960";
+  const secondaryPhone = contactInfo?.secondary_phone || "+91 98223 72070";
+  const primaryEmail = contactInfo?.primary_email || "info@bhumiindustrial.com";
+  
+  // Get unique cities from offices
+  const officeCities = offices?.map(office => office.city) || ["Nashik", "Mumbai", "Pune", "Nagpur"];
+
+  if (loading) {
+    return (
+      <>
+        {/* Top Utility Bar Skeleton */}
+        <div className="bg-gradient-to-r from-[#f97316] via-[#ea580c] to-[#fb923c] text-white py-2">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between">
+              <div className="hidden md:flex items-center gap-6 text-sm">
+                <div className="h-4 w-32 bg-white/20 animate-pulse rounded"></div>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="h-4 w-24 bg-white/20 animate-pulse rounded"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Main Navbar Skeleton */}
+        <nav className="sticky top-0 z-50 bg-white shadow-md py-3">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="h-12 w-24 bg-gray-200 animate-pulse rounded"></div>
+                <div className="h-10 w-px bg-gray-200 hidden sm:block"></div>
+                <div className="h-12 w-20 bg-gray-200 animate-pulse rounded hidden sm:block"></div>
+              </div>
+              <div className="hidden lg:block h-10 w-64 bg-gray-200 animate-pulse rounded"></div>
+              <div className="h-10 w-32 bg-gray-200 animate-pulse rounded hidden lg:block"></div>
+              <div className="lg:hidden h-10 w-10 bg-gray-200 animate-pulse rounded"></div>
+            </div>
+          </div>
+        </nav>
+      </>
+    );
+  }
+
   return (
     <>
-      {/* Top Utility Bar - UPDATED with correct contact details */}
+      {/* Top Utility Bar */}
       <div
-        className={`bg-gradient-to-r from-[#f97316] via-[#ea580c] to-[#fb923c] text-white transition-all duration-300 ${scrolled ? "py-1" : "py-2"
-          }`}
-        style={{ minHeight: scrolled ? "40px" : "48px" }}
+        className={`bg-gradient-to-r from-[#f97316] via-[#ea580c] to-[#fb923c] text-white transition-all duration-300 ${
+          scrolled ? "py-1" : "py-2"
+        }`}
       >
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
-            {/* Left side - Contact Info - UPDATED with correct numbers */}
-            <div className="hidden md:flex items-center gap-6 text-sm font-secondary">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            {/* Left side - Contact Info */}
+            <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm">
               <a
-                href="tel:+919096099960"
-                className="flex items-center gap-2 hover:text-[#fff7ed] transition-colors group"
+                href={`tel:${primaryPhone.replace(/\s+/g, '')}`}
+                className="flex items-center gap-1.5 hover:text-[#fff7ed] transition-colors group"
               >
-                <Phone size={14} className="group-hover:animate-pulse" />
-                <span>+91 90960 99960</span>
+                <Phone size={14} className="flex-shrink-0" />
+                <span className="hidden xs:inline">{primaryPhone}</span>
+                <span className="xs:hidden">Call</span>
               </a>
-              <span className="text-white/50">|</span>
+              <span className="text-white/50 hidden xs:inline">|</span>
               <a
-                href="tel:+919822372070"
-                className="flex items-center gap-2 hover:text-[#fff7ed] transition-colors"
+                href={`tel:${secondaryPhone.replace(/\s+/g, '')}`}
+                className="hidden xs:flex items-center gap-1.5 hover:text-[#fff7ed] transition-colors"
               >
                 <Phone size={14} />
-                <span>+91 98223 72070</span>
+                <span className="hidden sm:inline">{secondaryPhone}</span>
+                <span className="sm:hidden">Alt</span>
               </a>
-              <span className="text-white/50 hidden xl:inline">|</span>
+              
+              {/* Email - Hidden on mobile, visible on md and up */}
               <a
-                href="mailto:info@bhumiindustrial.com"
-                className="hidden xl:flex items-center gap-2 hover:text-[#fff7ed] transition-colors"
+                href={`mailto:${primaryEmail}`}
+                className="hidden md:flex items-center gap-1.5 hover:text-[#fff7ed] transition-colors"
               >
                 <Mail size={14} />
-                <span>info@bhumiindustrial.com</span>
+                <span className="hidden lg:inline">{primaryEmail}</span>
+                <span className="lg:hidden">Email</span>
               </a>
             </div>
 
-            {/* Center - Locations - UPDATED with all locations */}
+            {/* Center - Locations - Hidden on mobile, visible on lg and up */}
             <div className="hidden lg:flex items-center gap-2 text-sm">
               <MapPin size={14} className="flex-shrink-0" />
-              <span className="flex items-center gap-2">
-                <span className="hover:text-[#fff7ed] transition-colors">Nashik</span>
-                <span className="text-white/50">|</span>
-                <span className="hover:text-[#fff7ed] transition-colors">Mumbai</span>
-                <span className="text-white/50">|</span>
-                <span className="hover:text-[#fff7ed] transition-colors">Pune</span>
-                <span className="text-white/50">|</span>
-                <span className="hover:text-[#fff7ed] transition-colors">Nagpur</span>
+              <span className="flex items-center gap-2 flex-wrap">
+                {officeCities.slice(0, 3).map((city, index) => (
+                  <span key={city} className="whitespace-nowrap">
+                    {city}
+                    {index < Math.min(officeCities.length, 3) - 1 && <span className="text-white/50 ml-2">|</span>}
+                  </span>
+                ))}
+                {officeCities.length > 3 && <span className="text-white/50">+{officeCities.length - 3}</span>}
               </span>
             </div>
 
-            {/* Right side - Quick Links */}
-            <div className="flex items-center gap-4 font-secondary">
-              {quickLinks.map((link, index) => (
+            {/* Right side - Quick Links with Careers prominently displayed */}
+            <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm">
+              {/* Careers - Always visible with special styling */}
+              <Link
+                href="/careers"
+                className="flex items-center gap-1.5 bg-white/20 px-2 sm:px-3 py-1 rounded-full hover:bg-white/30 transition-colors font-medium"
+              >
+                <Briefcase size={14} />
+                <span>Careers</span>
+              </Link>
+              
+              {/* Other quick links - Hidden on mobile */}
+              {quickLinks.slice(1).map((link, index) => (
                 <Link
                   key={index}
                   href={link.href}
-                  className="text-sm hover:text-[#fff7ed] transition-colors hidden md:block"
+                  className="hidden sm:flex items-center gap-1.5 hover:text-[#fff7ed] transition-colors"
                 >
-                  {link.label}
+                  {link.icon}
+                  <span>{link.label}</span>
                 </Link>
               ))}
+              
+              <span className="text-white/50 hidden sm:block">|</span>
+              
               <button
                 onClick={handleDownloadBrochure}
-                className="flex items-center gap-2 text-sm hover:text-[#fff7ed] transition-colors group"
+                className="flex items-center gap-1.5 hover:text-[#fff7ed] transition-colors group"
               >
-                <Download size={16} className="group-hover:animate-bounce" />
-                <span className="hidden lg:inline">Brochure</span>
+                <Download size={14} className="group-hover:animate-bounce" />
+                <span className="hidden xs:inline">Brochure</span>
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Main Navbar - UPDATED contact button */}
+      {/* Main Navbar */}
       <nav
-        className={`sticky top-0 z-50 bg-white transition-all duration-300 ${scrolled
+        className={`sticky top-0 z-50 bg-white transition-all duration-300 ${
+          scrolled
             ? "shadow-[0_10px_25px_-5px_rgba(249,115,22,0.2)] py-2"
             : "shadow-md py-3"
-          }`}
-        style={{ minHeight: scrolled ? "72px" : "80px" }}
+        }`}
       >
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
-            {/* Dual Logo Section */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between gap-4">
+            {/* Dual Logo Section - Responsive sizing */}
             <Link
               href="/"
-              className="relative group flex items-center gap-3 flex-shrink-0"
+              className="relative group flex items-center gap-2 sm:gap-3 flex-shrink-0"
             >
-              <div
-                className={`transition-all duration-300 ${scrolled ? "h-12" : "h-18"
-                  }`}
-                style={{ width: scrolled ? "100px" : "120px" }}
-              >
+              <div className={`transition-all duration-300 ${scrolled ? "h-10 sm:h-12" : "h-12 sm:h-16"}`}>
                 <Image
                   src={bhumilogo}
                   alt="Bhumi Industrial Logo"
-                  width={scrolled ? 100 : 120}
-                  height={scrolled ? 48 : 60}
+                  width={scrolled ? 80 : 100}
+                  height={scrolled ? 40 : 48}
                   className="h-full w-auto object-contain"
                   priority
-                  style={{ objectFit: "contain" }}
                 />
               </div>
-              <div className="h-10 w-px bg-[#f3f4f6] hidden sm:block flex-shrink-0"></div>
-              <div
-                className={`transition-all duration-300 ${scrolled ? "h-12" : "h-16"
-                  }`}
-                style={{ width: scrolled ? "100px" : "120px" }}
-              >
+              <div className="h-8 sm:h-10 w-px bg-gray-200 hidden sm:block"></div>
+              <div className={`transition-all duration-300 ${scrolled ? "h-8 sm:h-10" : "h-10 sm:h-14"} hidden sm:block`}>
                 <Image
                   src={rajhanslogo}
                   alt="Rajhans Logo"
-                  width={scrolled ? 100 : 120}
-                  height={scrolled ? 48 : 64}
+                  width={scrolled ? 70 : 90}
+                  height={scrolled ? 32 : 40}
                   className="h-full w-auto object-contain"
                   priority
-                  style={{ objectFit: "contain" }}
                 />
               </div>
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center justify-center flex-1 gap-1 mx-4">
+            {/* Desktop Navigation - Hidden on mobile/tablet */}
+            <div className="hidden xl:flex items-center justify-center flex-1 gap-1">
               {navItems.map((item, index) => (
                 <div
                   key={index}
-                  className="relative flex-shrink-0"
+                  className="relative"
                   onMouseEnter={() => handleMouseEnter(index, item.type)}
                   onMouseLeave={handleMouseLeave}
                 >
                   {item.type === "mega" ? (
                     <>
-                      <button className="flex items-center gap-1 px-3 py-3 text-base font-semibold text-gray-700 hover:text-[#f97316] hover:bg-[#fff7ed] rounded-2xl transition-all whitespace-nowrap">
+                      <button className="flex items-center gap-1 px-3 py-2 text-sm font-semibold text-gray-700 hover:text-[#f97316] hover:bg-[#fff7ed] rounded-xl transition-all whitespace-nowrap">
                         <span>{item.name}</span>
                         {item.count && (
                           <span className="ml-1 text-xs bg-[#f97316]/10 text-[#ea580c] px-1.5 py-0.5 rounded-full">
@@ -399,16 +485,17 @@ export default function Navbar() {
                           </span>
                         )}
                         <ChevronDown
-                          size={16}
-                          className={`transition-transform duration-200 ${activeMegaMenu === index ? "rotate-180" : ""
-                            }`}
+                          size={14}
+                          className={`transition-transform duration-200 ${
+                            activeMegaMenu === index ? "rotate-180" : ""
+                          }`}
                         />
                       </button>
 
-                      {/* Mega Menu - Two Columns */}
+                      {/* Mega Menu */}
                       {activeMegaMenu === index && (
-                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-[600px] bg-white shadow-xl rounded-2xl border border-[#ffedd5]/50 py-6 px-4 animate-fadeIn z-50">
-                          <div className="grid grid-cols-2 gap-4">
+                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-[800px] bg-white shadow-xl rounded-2xl border border-[#ffedd5]/50 py-6 px-4 animate-fadeIn z-50">
+                          <div className="grid grid-cols-2 gap-6">
                             {item.columns.map((column, colIndex) => (
                               <div key={colIndex} className="space-y-1">
                                 {column.map((service, serviceIndex) => (
@@ -455,22 +542,23 @@ export default function Navbar() {
                     </>
                   ) : item.type === "dropdown" ? (
                     <>
-                      <button className="flex items-center gap-1 px-3 py-3 text-base font-semibold text-gray-700 hover:text-[#f97316] hover:bg-[#fff7ed] rounded-2xl transition-all whitespace-nowrap">
+                      <button className="flex items-center gap-1 px-3 py-2 text-sm font-semibold text-gray-700 hover:text-[#f97316] hover:bg-[#fff7ed] rounded-xl transition-all whitespace-nowrap">
                         <span>{item.name}</span>
                         <ChevronDown
-                          size={16}
-                          className={`transition-transform duration-200 ${activeDropdown === index ? "rotate-180" : ""
-                            }`}
+                          size={14}
+                          className={`transition-transform duration-200 ${
+                            activeDropdown === index ? "rotate-180" : ""
+                          }`}
                         />
                       </button>
 
                       {activeDropdown === index && (
-                        <div className="absolute top-full left-0 mt-2 w-56 bg-white shadow-xl rounded-2xl border border-[#ffedd5]/50 py-2 animate-fadeIn z-50">
+                        <div className="absolute top-full left-0 mt-2 w-64 bg-white shadow-xl rounded-2xl border border-[#ffedd5]/50 py-2 animate-fadeIn z-50">
                           {item.dropdown.map((subItem, subIndex) => (
                             <Link
                               key={subIndex}
                               href={subItem.href}
-                              className="block px-4 py-3 text-gray-700 hover:text-[#f97316] hover:bg-[#fff7ed] transition-all text-sm whitespace-nowrap"
+                              className="block px-4 py-2.5 text-gray-700 hover:text-[#f97316] hover:bg-[#fff7ed] transition-all text-sm"
                               onClick={() => {
                                 setActiveDropdown(null);
                                 setMobileOpen(false);
@@ -485,7 +573,7 @@ export default function Navbar() {
                   ) : (
                     <Link
                       href={item.href}
-                      className="inline-block px-3 py-3 text-base font-semibold text-gray-700 hover:text-[#f97316] hover:bg-[#fff7ed] rounded-2xl transition-all whitespace-nowrap"
+                      className="inline-block px-3 py-2 text-sm font-semibold text-gray-700 hover:text-[#f97316] hover:bg-[#fff7ed] rounded-xl transition-all whitespace-nowrap"
                     >
                       {item.name}
                     </Link>
@@ -494,28 +582,56 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* Action Buttons - UPDATED with correct phone */}
-            <div className="hidden lg:flex items-center gap-4 flex-shrink-0">
-              <a
-                href="tel:+919096099960"
-                className="flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-[#f97316] via-[#ea580c] to-[#fb923c] text-white rounded-2xl font-bold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all group whitespace-nowrap"
+            {/* Tablet Navigation - Visible on lg only */}
+            <div className="hidden lg:flex xl:hidden items-center gap-2">
+              <Link
+                href="/industrial"
+                className="px-3 py-2 text-sm font-semibold text-gray-700 hover:text-[#f97316] hover:bg-[#fff7ed] rounded-xl transition-all"
               >
-                <Phone className="w-5 h-5 flex-shrink-0" />
-                <span>Free Consultation</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform flex-shrink-0" />
+                Services
+              </Link>
+              <Link
+                href="/about"
+                className="px-3 py-2 text-sm font-semibold text-gray-700 hover:text-[#f97316] hover:bg-[#fff7ed] rounded-xl transition-all"
+              >
+                About
+              </Link>
+              <Link
+                href="/careers"
+                className="px-3 py-2 text-sm font-semibold text-[#f97316] hover:text-[#ea580c] hover:bg-[#fff7ed] rounded-xl transition-all"
+              >
+                Careers
+              </Link>
+              <Link
+                href="/contact"
+                className="px-3 py-2 text-sm font-semibold text-gray-700 hover:text-[#f97316] hover:bg-[#fff7ed] rounded-xl transition-all"
+              >
+                Contact
+              </Link>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
+              <a
+                href={`tel:${primaryPhone.replace(/\s+/g, '')}`}
+                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#f97316] via-[#ea580c] to-[#fb923c] text-white rounded-xl font-semibold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all whitespace-nowrap text-sm"
+              >
+                <Phone className="w-4 h-4" />
+                <span className="hidden xl:inline">Free Consultation</span>
+                <span className="xl:hidden">Call</span>
               </a>
             </div>
 
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden p-2 rounded-xl hover:bg-[#fff7ed] hover:text-[#f97316] transition-all flex-shrink-0"
+              className="lg:hidden p-2 rounded-xl hover:bg-[#fff7ed] hover:text-[#f97316] transition-all"
               aria-label="Toggle menu"
             >
               {mobileOpen ? (
-                <X className="w-8 h-8" />
+                <X className="w-6 h-6" />
               ) : (
-                <Menu className="w-8 h-8" />
+                <Menu className="w-6 h-6" />
               )}
             </button>
           </div>
@@ -529,134 +645,103 @@ export default function Navbar() {
           />
         )}
 
-        {/* Mobile Menu Panel - UPDATED contact info */}
+        {/* Mobile Menu Panel */}
         <div
-          className={`lg:hidden fixed top-0 right-0 h-full w-80 bg-white shadow-2xl z-50 transform transition-transform duration-300 overflow-y-auto ${mobileOpen ? "translate-x-0" : "translate-x-full"
-            }`}
+          className={`lg:hidden fixed top-0 right-0 h-full w-full sm:w-96 bg-white shadow-2xl z-50 transform transition-transform duration-300 overflow-y-auto ${
+            mobileOpen ? "translate-x-0" : "translate-x-full"
+          }`}
         >
-          <div className="p-6 h-full flex flex-col">
-            <div className="flex items-center justify-between mb-8">
+          <div className="p-4 sm:p-6 h-full flex flex-col">
+            {/* Mobile Menu Header */}
+            <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-2">
                 <div className="h-10 w-auto">
                   <Image
                     src={bhumilogo}
                     alt="Bhumi Industrial"
+                    width={80}
+                    height={40}
                     className="h-full w-auto object-contain"
                   />
                 </div>
-                <span className="text-lg font-bold bg-gradient-to-r from-[#f97316] via-[#ea580c] to-[#fb923c] bg-clip-text text-transparent">
-                  Bhumi
+                <span className="text-base sm:text-lg font-bold bg-gradient-to-r from-[#f97316] via-[#ea580c] to-[#fb923c] bg-clip-text text-transparent">
+                  Bhumi Industrial
                 </span>
               </div>
               <button
                 onClick={() => setMobileOpen(false)}
                 className="p-2 hover:bg-[#fff7ed] rounded-lg transition-colors"
               >
-                <X className="w-6 h-6 text-[#f97316]" />
+                <X className="w-5 h-5 text-[#f97316]" />
               </button>
             </div>
 
-            {/* Mobile Contact Info - UPDATED */}
-            <div className="mb-6 p-4 bg-gradient-to-r from-[#f97316]/10 to-[#ea580c]/10 rounded-xl border border-[#f97316]/20">
-              <h3 className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
-                <Phone size={14} className="text-[#f97316]" />
-                Contact Us
-              </h3>
+            {/* Mobile Contact Info */}
+            <div className="mb-4 p-3 sm:p-4 bg-gradient-to-r from-[#f97316]/10 to-[#ea580c]/10 rounded-xl border border-[#f97316]/20">
               <div className="space-y-2">
                 <a
-                  href="tel:+919096099960"
+                  href={`tel:${primaryPhone.replace(/\s+/g, '')}`}
                   className="flex items-center gap-2 text-sm text-gray-600 hover:text-[#f97316] transition-colors"
                 >
-                  <Phone size={12} className="text-[#f97316]" />
-                  +91 90960 99960
+                  <Phone size={14} className="text-[#f97316]" />
+                  {primaryPhone}
                 </a>
                 <a
-                  href="tel:+919822372070"
-                  className="flex items-center gap-2 text-sm text-gray-600 hover:text-[#f97316] transition-colors"
-                >
-                  <Phone size={12} className="text-[#f97316]" />
-                  +91 98223 72070
-                </a>
-                <a
-                  href="mailto:info@bhumiindustrial.com"
+                  href={`mailto:${primaryEmail}`}
                   className="flex items-center gap-2 text-sm text-gray-600 hover:text-[#f97316] transition-colors break-all"
                 >
-                  <Mail size={12} className="text-[#f97316]" />
-                  info@bhumiindustrial.com
+                  <Mail size={14} className="text-[#f97316]" />
+                  {primaryEmail}
                 </a>
               </div>
             </div>
 
             {/* Mobile Navigation */}
             <div className="flex-1 overflow-y-auto hide-scrollbar pb-20">
-              {/* Home Link */}
+              {/* Home */}
               <Link
                 href="/"
-                className="block p-4 text-gray-800 hover:bg-[#fff7ed] rounded-xl font-semibold transition-colors mb-2"
+                className="block p-3 sm:p-4 text-gray-800 hover:bg-[#fff7ed] rounded-xl font-semibold transition-colors mb-1"
                 onClick={() => setMobileOpen(false)}
               >
                 Home
               </Link>
 
               {/* About Dropdown */}
-              <div className="mb-2">
+              <div className="mb-1">
                 <button
                   onClick={() => handleMobileDropdown("about")}
-                  className="flex items-center justify-between w-full p-4 text-left text-gray-800 hover:bg-[#fff7ed] rounded-xl transition-colors"
+                  className="flex items-center justify-between w-full p-3 sm:p-4 text-left text-gray-800 hover:bg-[#fff7ed] rounded-xl transition-colors"
                 >
                   <span className="font-semibold">About</span>
                   <ChevronDown
                     size={18}
-                    className={`transition-transform duration-200 ${activeDropdown === "about" ? "rotate-180" : ""
-                      }`}
+                    className={`transition-transform duration-200 ${
+                      activeDropdown === "about" ? "rotate-180" : ""
+                    }`}
                   />
                 </button>
                 {activeDropdown === "about" && (
-                  <div className="ml-4 border-l-2 border-[#f97316]/20 pl-2">
-                    <Link
-                      href="/about#company-profile"
-                      className="block p-3 text-gray-600 hover:text-[#f97316] hover:bg-[#fff7ed] rounded-lg text-sm"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      Company Profile
-                    </Link>
-                    <Link
-                      href="/about#founder"
-                      className="block p-3 text-gray-600 hover:text-[#f97316] hover:bg-[#fff7ed] rounded-lg text-sm"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      Our Founder
-                    </Link>
-                    <Link
-                      href="/about#team"
-                      className="block p-3 text-gray-600 hover:text-[#f97316] hover:bg-[#fff7ed] rounded-lg text-sm"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      Our Team
-                    </Link>
-                    <Link
-                      href="/about#milestones"
-                      className="block p-3 text-gray-600 hover:text-[#f97316] hover:bg-[#fff7ed] rounded-lg text-sm"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      27+ Years of Excellence
-                    </Link>
-                    <Link
-                      href="/about#testimonials"
-                      className="block p-3 text-gray-600 hover:text-[#f97316] hover:bg-[#fff7ed] rounded-lg text-sm"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      Testimonials
-                    </Link>
+                  <div className="ml-4 border-l-2 border-[#f97316]/20 pl-2 mt-1">
+                    {navItems.find(item => item.name === "About").dropdown.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block p-2.5 sm:p-3 text-gray-600 hover:text-[#f97316] hover:bg-[#fff7ed] rounded-lg text-sm"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
                   </div>
                 )}
               </div>
 
-              {/* Industrial Services - Mobile with Icons */}
-              <div className="mb-2">
+              {/* Industrial Services */}
+              <div className="mb-1">
                 <button
                   onClick={() => handleMobileDropdown("industrial")}
-                  className="flex items-center justify-between w-full p-4 text-left text-gray-800 hover:bg-[#fff7ed] rounded-xl transition-colors"
+                  className="flex items-center justify-between w-full p-3 sm:p-4 text-left text-gray-800 hover:bg-[#fff7ed] rounded-xl transition-colors"
                 >
                   <span className="font-semibold flex items-center gap-2">
                     Industrial Services
@@ -666,41 +751,35 @@ export default function Navbar() {
                   </span>
                   <ChevronDown
                     size={18}
-                    className={`transition-transform duration-200 ${activeDropdown === "industrial" ? "rotate-180" : ""
-                      }`}
+                    className={`transition-transform duration-200 ${
+                      activeDropdown === "industrial" ? "rotate-180" : ""
+                    }`}
                   />
                 </button>
                 {activeDropdown === "industrial" && (
-                  <div className="ml-4 space-y-1">
+                  <div className="ml-4 space-y-1 mt-1 max-h-96 overflow-y-auto">
                     {industrialServices.map((service, index) => (
                       <Link
                         key={index}
                         href={service.href}
-                        className="flex items-center gap-3 p-3 text-gray-600 hover:text-[#f97316] hover:bg-[#fff7ed] rounded-lg transition-colors text-sm"
+                        className="flex items-center gap-3 p-2.5 sm:p-3 text-gray-600 hover:text-[#f97316] hover:bg-[#fff7ed] rounded-lg transition-colors text-sm"
                         onClick={() => setMobileOpen(false)}
                       >
                         <span className="text-[#f97316] flex-shrink-0">
                           {service.icon}
                         </span>
-                        {service.name}
+                        <span className="line-clamp-1">{service.name}</span>
                       </Link>
                     ))}
-                    <Link
-                      href="/industrial"
-                      className="flex items-center gap-2 p-3 text-[#f97316] font-semibold text-sm"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      View All <ArrowRight size={14} />
-                    </Link>
                   </div>
                 )}
               </div>
 
-              {/* Financial Services - Mobile with Icons */}
-              <div className="mb-2">
+              {/* Financial Services */}
+              <div className="mb-1">
                 <button
                   onClick={() => handleMobileDropdown("financial")}
-                  className="flex items-center justify-between w-full p-4 text-left text-gray-800 hover:bg-[#fff7ed] rounded-xl transition-colors"
+                  className="flex items-center justify-between w-full p-3 sm:p-4 text-left text-gray-800 hover:bg-[#fff7ed] rounded-xl transition-colors"
                 >
                   <span className="font-semibold flex items-center gap-2">
                     Financial Services
@@ -710,87 +789,141 @@ export default function Navbar() {
                   </span>
                   <ChevronDown
                     size={18}
-                    className={`transition-transform duration-200 ${activeDropdown === "financial" ? "rotate-180" : ""
-                      }`}
+                    className={`transition-transform duration-200 ${
+                      activeDropdown === "financial" ? "rotate-180" : ""
+                    }`}
                   />
                 </button>
                 {activeDropdown === "financial" && (
-                  <div className="ml-4 space-y-1">
+                  <div className="ml-4 space-y-1 mt-1 max-h-96 overflow-y-auto">
                     {financialServices.map((service, index) => (
                       <Link
                         key={index}
                         href={service.href}
-                        className="flex items-center gap-3 p-3 text-gray-600 hover:text-[#f97316] hover:bg-[#fff7ed] rounded-lg transition-colors text-sm"
+                        className="flex items-center gap-3 p-2.5 sm:p-3 text-gray-600 hover:text-[#f97316] hover:bg-[#fff7ed] rounded-lg transition-colors text-sm"
                         onClick={() => setMobileOpen(false)}
                       >
                         <span className="text-[#f97316] flex-shrink-0">
                           {service.icon}
                         </span>
-                        {service.name}
+                        <span className="line-clamp-1">{service.name}</span>
                       </Link>
                     ))}
-                    <Link
-                      href="/financial"
-                      className="flex items-center gap-2 p-3 text-[#f97316] font-semibold text-sm"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      View All <ArrowRight size={14} />
-                    </Link>
                   </div>
                 )}
               </div>
 
-              {/* Contact Link */}
+              {/* Careers - Prominently displayed in mobile menu */}
+              <Link
+                href="/careers"
+                className="flex items-center gap-2 p-3 sm:p-4 my-2 bg-gradient-to-r from-[#f97316]/10 to-[#ea580c]/10 text-[#ea580c] rounded-xl font-semibold transition-colors border border-[#f97316]/20"
+                onClick={() => setMobileOpen(false)}
+              >
+                <Briefcase size={20} />
+                <span>Careers</span>
+              </Link>
+
+              {/* Contact */}
               <Link
                 href="/contact"
-                className="block p-4 text-gray-800 hover:bg-[#fff7ed] rounded-xl font-semibold transition-colors mb-2"
+                className="block p-3 sm:p-4 text-gray-800 hover:bg-[#fff7ed] rounded-xl font-semibold transition-colors mb-1"
                 onClick={() => setMobileOpen(false)}
               >
                 Contact
               </Link>
 
-              {/* Quick Links in Mobile */}
-              <div className="mt-8 pt-6 border-t border-[#ffedd5]">
-                <h3 className="text-sm font-semibold text-[#9ca3af] uppercase mb-3 px-4">
-                  Quick Links
+              {/* Quick Links */}
+              <div className="mt-6 pt-4 border-t border-[#ffedd5]">
+                <h3 className="text-xs font-semibold text-gray-400 uppercase mb-2 px-3 sm:px-4">
+                  More Links
                 </h3>
-                {quickLinks.map((link, index) => (
+                {quickLinks.slice(1).map((link, index) => (
                   <Link
                     key={index}
                     href={link.href}
-                    className="block p-4 text-gray-600 hover:bg-[#fff7ed] rounded-xl transition-colors"
+                    className="flex items-center gap-2 p-3 sm:p-4 text-gray-600 hover:bg-[#fff7ed] rounded-xl transition-colors"
                     onClick={() => setMobileOpen(false)}
                   >
-                    {link.label}
+                    {link.icon}
+                    <span>{link.label}</span>
                   </Link>
                 ))}
               </div>
             </div>
 
-            {/* Mobile Action Buttons - UPDATED */}
-            <div className="pt-6 border-t border-[#ffedd5] space-y-3 bg-white">
+            {/* Mobile Action Buttons */}
+            <div className="pt-4 border-t border-[#ffedd5] space-y-2 bg-white">
               <a
-                href="tel:+919096099960"
-                className="flex items-center justify-center gap-2 w-full p-4 bg-gradient-to-r from-[#f97316] via-[#ea580c] to-[#fb923c] text-white rounded-xl font-bold shadow-lg hover:shadow-xl transition-all"
+                href={`tel:${primaryPhone.replace(/\s+/g, '')}`}
+                className="flex items-center justify-center gap-2 w-full p-3 sm:p-4 bg-gradient-to-r from-[#f97316] via-[#ea580c] to-[#fb923c] text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all text-sm"
                 onClick={() => setMobileOpen(false)}
               >
-                <Phone className="w-5 h-5" />
-                Call Now: +91 90960 99960
+                <Phone className="w-4 h-4" />
+                Call Now
               </a>
               <button
                 onClick={() => {
                   handleDownloadBrochure();
                   setMobileOpen(false);
                 }}
-                className="flex items-center justify-center gap-2 w-full p-4 bg-[#fff7ed] text-[#ea580c] rounded-xl font-bold hover:bg-[#f97316]/20 transition-all"
+                className="flex items-center justify-center gap-2 w-full p-3 sm:p-4 bg-[#fff7ed] text-[#ea580c] rounded-xl font-semibold hover:bg-[#f97316]/20 transition-all text-sm"
               >
-                <Download className="w-5 h-5" />
+                <Download className="w-4 h-4" />
                 Download Brochure
               </button>
             </div>
           </div>
         </div>
       </nav>
+
+      {/* Add custom CSS for xs breakpoint and animations */}
+      <style jsx global>{`
+        @media (min-width: 480px) {
+          .xs\\:inline {
+            display: inline;
+          }
+          .xs\\:hidden {
+            display: none;
+          }
+          .xs\\:block {
+            display: block;
+          }
+          .xs\\:flex {
+            display: flex;
+          }
+        }
+        
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .animate-fadeIn {
+          animation: fadeIn 0.2s ease-out;
+        }
+        
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        
+        .hide-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        
+        .line-clamp-1 {
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+        }
+      `}</style>
     </>
   );
 }
@@ -814,6 +947,6 @@ function Rocket(props) {
       <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
       <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
       <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
-    </svg> 
+    </svg>
   );
 }
