@@ -307,6 +307,7 @@ export default async function AboutPage() {
         </section>
 
         {/* ── FOUNDER ────────────────────────────────────────────── */}
+                {/* ── FOUNDER ────────────────────────────────────────────── */}
         <section id="founder" className="py-12 sm:py-16 lg:py-20 bg-[#fff7ed] scroll-mt-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-8 sm:mb-10 lg:mb-12">
@@ -319,8 +320,8 @@ export default async function AboutPage() {
             </div>
             <div className="max-w-5xl mx-auto bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden">
               <div className="grid md:grid-cols-2">
-                {/* Founder Image Section */}
-                <div className="relative h-[300px] sm:h-[400px] lg:h-[500px] bg-gradient-to-br from-[#001a33] to-[#003366] overflow-hidden">
+                {/* Founder Image Section - Fixed height to match content */}
+                <div className="relative h-full min-h-[400px] sm:min-h-[450px] lg:min-h-[500px] bg-gradient-to-br from-[#001a33] to-[#003366] overflow-hidden">
                   {page?.founder_image ? (
                     <Image
                       src={`${axiosInstance.defaults.fileURL}/${page.founder_image}`}
@@ -351,50 +352,52 @@ export default async function AboutPage() {
                   </div>
                 </div>
                 
-                {/* Founder Details Section */}
-                <div className="p-5 sm:p-6 lg:p-8 xl:p-10">
-                  <div className="mb-4 sm:mb-5 lg:mb-6">
-                    <div className="flex items-center gap-1.5 sm:gap-2 mb-3 sm:mb-4">
-                      <Award className="w-4 h-4 sm:w-5 sm:h-5 text-[#f97316]" />
-                      <span className="text-xs sm:text-sm font-semibold text-gray-500">
-                        {stats[0]?.value || "27+"} YEARS EXPERIENCE
-                      </span>
-                    </div>
-                    <p className="text-sm sm:text-base text-gray-700 mb-3 sm:mb-4 leading-relaxed">
-                      {page?.founder_description_1}
-                    </p>
-                    <p className="text-sm sm:text-base text-gray-700 mb-4 sm:mb-5 lg:mb-6 leading-relaxed">
-                      {page?.founder_description_2}
-                    </p>
-                  </div>
-
-                  {/* Key Stats */}
-                  <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:gap-4 mb-4 sm:mb-5 lg:mb-6">
-                    {founderStats.map((stat, i) => (
-                      <div key={i} className="bg-[#fff7ed] p-2 sm:p-2.5 lg:p-3 rounded-lg sm:rounded-xl text-center">
-                        <div className="text-sm sm:text-base lg:text-lg xl:text-xl font-bold text-[#f97316]">{stat.value}</div>
-                        <div className="text-[10px] sm:text-xs text-gray-600">{stat.label}</div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Expertise Tags */}
-                  <div className="mb-4 sm:mb-5 lg:mb-6">
-                    <h4 className="text-xs sm:text-sm font-semibold text-gray-700 mb-2 sm:mb-3">Areas of Expertise:</h4>
-                    <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                      {founderExpertise.map((tag, i) => (
-                        <span
-                          key={i}
-                          className="text-[10px] sm:text-xs bg-[#fff7ed] text-[#ea580c] border border-[#ffedd5] rounded-lg px-2 sm:px-2.5 lg:px-3 py-1 sm:py-1.5 font-medium"
-                        >
-                          {tag}
+                {/* Founder Details Section - Removed fixed height, let it be natural */}
+                <div className="p-5 sm:p-6 lg:p-8 xl:p-10 flex flex-col justify-between h-full">
+                  <div>
+                    <div className="mb-4 sm:mb-5 lg:mb-6">
+                      <div className="flex items-center gap-1.5 sm:gap-2 mb-3 sm:mb-4">
+                        <Award className="w-4 h-4 sm:w-5 sm:h-5 text-[#f97316]" />
+                        <span className="text-xs sm:text-sm font-semibold text-gray-500">
+                          {stats[0]?.value || "27+"} YEARS EXPERIENCE
                         </span>
+                      </div>
+                      <p className="text-sm sm:text-base text-gray-700 mb-3 sm:mb-4 leading-relaxed">
+                        {page?.founder_description_1}
+                      </p>
+                      <p className="text-sm sm:text-base text-gray-700 mb-4 sm:mb-5 lg:mb-6 leading-relaxed">
+                        {page?.founder_description_2}
+                      </p>
+                    </div>
+
+                    {/* Key Stats */}
+                    <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:gap-4 mb-4 sm:mb-5 lg:mb-6">
+                      {founderStats.map((stat, i) => (
+                        <div key={i} className="bg-[#fff7ed] p-2 sm:p-2.5 lg:p-3 rounded-lg sm:rounded-xl text-center">
+                          <div className="text-sm sm:text-base lg:text-lg xl:text-xl font-bold text-[#f97316]">{stat.value}</div>
+                          <div className="text-[10px] sm:text-xs text-gray-600">{stat.label}</div>
+                        </div>
                       ))}
+                    </div>
+
+                    {/* Expertise Tags */}
+                    <div className="mb-4 sm:mb-5 lg:mb-6">
+                      <h4 className="text-xs sm:text-sm font-semibold text-gray-700 mb-2 sm:mb-3">Areas of Expertise:</h4>
+                      <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                        {founderExpertise.map((tag, i) => (
+                          <span
+                            key={i}
+                            className="text-[10px] sm:text-xs bg-[#fff7ed] text-[#ea580c] border border-[#ffedd5] rounded-lg px-2 sm:px-2.5 lg:px-3 py-1 sm:py-1.5 font-medium"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
 
                   {/* Contact Buttons - Always side by side */}
-                  <div className="flex flex-row flex-nowrap gap-2 sm:gap-3">
+                  <div className="flex flex-row flex-nowrap gap-2 sm:gap-3 mt-auto">
                     <a
                       href={`tel:${primaryPhone.replace(/\s+/g, '')}`}
                       className="flex-1 flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 lg:px-4 py-2 sm:py-2.5 lg:py-3 bg-[#f97316] text-white rounded-lg sm:rounded-xl font-semibold sm:font-bold hover:bg-[#ea580c] transition-colors text-[11px] xs:text-xs sm:text-sm whitespace-nowrap min-h-[44px]"
