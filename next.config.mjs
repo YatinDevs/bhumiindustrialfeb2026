@@ -56,6 +56,18 @@ const nextConfig = {
           },
         ],
       },
+      {
+        // Award certificate PDFs are embedded in an <iframe> on the same origin
+        // (Awards section) — relax the global X-Frame-Options: DENY just for
+        // this path so the browser's PDF viewer can render them inline.
+        // Also drop the global immutable 1-year cache so updated award files
+        // don't get stuck in the browser cache with a stale DENY header.
+        source: "/awards/:path*",
+        headers: [
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "Cache-Control", value: "public, max-age=3600, must-revalidate" },
+        ],
+      },
     ];
   },
 

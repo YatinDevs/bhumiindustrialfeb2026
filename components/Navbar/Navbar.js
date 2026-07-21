@@ -262,6 +262,7 @@ export default function Navbar() {
         { name: "Our Founder - Milind P. Rajhans", href: "/about#founder" },
         { name: "Our Team", href: "/about#team" },
         { name: "27+ Years of Excellence", href: "/about#milestones" },
+        { name: "Awards & Recognition", href: "/about#awards" },
         { name: "Testimonials", href: "/about#testimonials" },
       ],
     },

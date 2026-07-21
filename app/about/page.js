@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { buildMetadata, getBreadcrumbSchema } from "@/utils/seoConfig";
 import SeoWrapper from "@/components/SeoWrapper/SeoWrapper";
+import AwardsSection from "@/components/AwardsSection";
 import axiosInstance from "@/services/api";
 
 export const revalidate = 3600; // ISR - revalidate every hour
@@ -491,6 +492,9 @@ export default async function AboutPage() {
             </div>
           </div>
         </section>
+
+        {/* ── AWARDS ──────────────────────────────────────────────── */}
+        <AwardsSection />
 
         {/* ── TESTIMONIALS ───────────────────────────────────────── */}
         <section id="testimonials" className="py-12 sm:py-16 lg:py-20 bg-white scroll-mt-20">

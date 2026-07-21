@@ -5,7 +5,7 @@ import {
   ambika, bajaj, bharatpetro, bhavik, bkg, cure, dabur, din, emic, fabweld, ford, hero, honda, hp, hyundai, 
   industry1, industry2, inorbit, lubnashik, lubpune, maccia, mahindra, mariott, midc, msme, omkar, phoenix, 
   prasad, precision, ptec, quality, sandal, signature, slidewell, starsprings, suzuki, tastel, tata, tvs, 
-  vinam, yamaha, zigma, zoom_technologies 
+  vinam, yamaha, zigma, zoom_technologies, advance_technologies, alpha_drip, swe, health_makers
 } from "@/assets";
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -62,6 +62,10 @@ const industrialClients = [
   { id: 26, name: "Zigma", logo: zigma, alt: "Zigma" },
   { id: 27, name: "Ambika", logo: ambika, alt: "Ambika" },
   { id: 28, name: "Prasad", logo: prasad, alt: "Prasad" },
+  { id: 29, name: "Alpha Drip", logo: alpha_drip, alt: "Alpha Drip" }, 
+  { id: 30, name: "Advance Technologies", logo: advance_technologies, alt: "Advance Technologies" },
+  { id: 31, name: "SWE", logo: swe, alt: "SWE" },
+  { id: 32, name: "Health-Makers", logo: health_makers, alt: "Health-Makers" }
 ];
 
 // Duplicate arrays for seamless infinite scroll
