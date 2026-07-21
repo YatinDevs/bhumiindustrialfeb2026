@@ -72,6 +72,12 @@ const industrialClients = [
 const automotiveSlides = [...automotiveBrands, ...automotiveBrands];
 const industrialSlides = [...industrialClients, ...industrialClients];
 
+// Shared scroll rate (seconds per logo) so sliders with different item
+// counts still move at the same visual speed instead of the same duration
+const SECONDS_PER_LOGO = 3;
+const automotiveSpeed = automotiveBrands.length * SECONDS_PER_LOGO;
+const industrialSpeed = industrialClients.length * SECONDS_PER_LOGO;
+
 // Infinite Slider Component with CSS animation
 function InfiniteSlider({ partners, speed = 30, direction = "left" }) {
   const [mounted, setMounted] = useState(false);
@@ -344,7 +350,7 @@ export default function PartnersShowcase() {
           </div>
 
           <div className="bg-white/50 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 shadow-inner">
-            <InfiniteSlider partners={automotiveSlides} speed={30} direction="left" />
+            <InfiniteSlider partners={automotiveSlides} speed={automotiveSpeed} direction="left" />
           </div>
         </div>
 
@@ -363,7 +369,7 @@ export default function PartnersShowcase() {
           </div>
 
           <div className="bg-white/50 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 shadow-inner">
-            <InfiniteSlider partners={industrialSlides} speed={30} direction="right" />
+            <InfiniteSlider partners={industrialSlides} speed={industrialSpeed} direction="right" />
           </div>
         </div>
 
