@@ -363,7 +363,7 @@ export default function PartnersShowcase() {
           </div>
 
           <div className="bg-white/50 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 shadow-inner">
-            <InfiniteSlider partners={industrialSlides} speed={25} direction="right" />
+            <InfiniteSlider partners={industrialSlides} speed={30} direction="right" />
           </div>
         </div>
 
