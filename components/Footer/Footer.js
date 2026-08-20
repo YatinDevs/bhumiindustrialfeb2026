@@ -100,9 +100,12 @@ export default function Footer() {
   ];
 
   // Get data from API or use fallbacks
-  const primaryPhone = contactInfo?.primary_phone || "+91 90960 99960";
-  const secondaryPhone = contactInfo?.secondary_phone || "+91 98223 72070";
-  const whatsappNumber = contactInfo?.whatsapp_number || "+91 90960 99960";
+  const primaryPhone = contactInfo?.primary_phone || "+91 98223 72070";
+  const secondaryPhone =
+    contactInfo?.secondary_phone && contactInfo.secondary_phone !== primaryPhone
+      ? contactInfo.secondary_phone
+      : null;
+  const whatsappNumber = contactInfo?.whatsapp_number || "+91 98223 72070";
   const primaryEmail = contactInfo?.primary_email || "info@bhumiindustrial.com";
   const secondaryEmail = contactInfo?.secondary_email;
   
@@ -211,20 +214,22 @@ export default function Footer() {
                 </span>
               </a>
               
-              {/* Secondary Phone - Hide on very small screens */}
-              <a
-                href={`tel:${secondaryPhone.replace(/\s+/g, '')}`}
-                className="hidden xs:flex items-center gap-2 sm:gap-3 text-[#d9e6f2] hover:text-[#f97316] transition-colors group text-sm sm:text-base"
-              >
-                <span className="p-1.5 sm:p-2 bg-white/10 rounded-lg group-hover:bg-[#f97316]/20 shrink-0">
-                  <Phone size={14} className="sm:w-4 sm:h-4" />
-                </span>
-                <span className="font-secondary truncate">{secondaryPhone}</span>
-                <span className="text-[10px] sm:text-xs bg-white/10 px-1.5 sm:px-2 py-0.5 rounded-full ml-auto shrink-0">
-                  Alt
-                </span>
-              </a>
-              
+              {/* Secondary Phone - only shown when a distinct alternate number exists */}
+              {secondaryPhone && (
+                <a
+                  href={`tel:${secondaryPhone.replace(/\s+/g, '')}`}
+                  className="hidden xs:flex items-center gap-2 sm:gap-3 text-[#d9e6f2] hover:text-[#f97316] transition-colors group text-sm sm:text-base"
+                >
+                  <span className="p-1.5 sm:p-2 bg-white/10 rounded-lg group-hover:bg-[#f97316]/20 shrink-0">
+                    <Phone size={14} className="sm:w-4 sm:h-4" />
+                  </span>
+                  <span className="font-secondary truncate">{secondaryPhone}</span>
+                  <span className="text-[10px] sm:text-xs bg-white/10 px-1.5 sm:px-2 py-0.5 rounded-full ml-auto shrink-0">
+                    Alt
+                  </span>
+                </a>
+              )}
+
               {/* Email - Truncated on mobile */}
               <a
                 href={`mailto:${primaryEmail}`}
@@ -493,7 +498,9 @@ export default function Footer() {
           {/* Contact Summary - Grid on mobile */}
           <div className="grid grid-cols-1 xs:grid-cols-2 sm:flex justify-center gap-x-4 gap-y-1 mt-2 text-[8px] sm:text-xs text-[#b3cce6]">
             <span className="truncate text-center xs:text-left">Primary: {primaryPhone}</span>
-            <span className="hidden xs:block text-center">Alt: {secondaryPhone}</span>
+            {secondaryPhone && (
+              <span className="hidden xs:block text-center">Alt: {secondaryPhone}</span>
+            )}
             <span className="col-span-2 xs:col-span-1 text-center xs:text-left truncate">{primaryEmail}</span>
           </div>
         </div>

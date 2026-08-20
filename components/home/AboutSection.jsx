@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
 import {
   Award,
   Users,
@@ -12,7 +11,6 @@ import {
   ChevronRight,
   Phone,
 } from "lucide-react";
-import { founderImage } from "../../assets"; // Adjust path as needed
 
 const AboutSection = () => {
   const stats = [
@@ -69,27 +67,17 @@ const AboutSection = () => {
         </div>
 
         <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 lg:gap-12">
-          {/* Left Column - Image and Stats */}
+          {/* Left Column - Founder Highlight and Stats */}
           <div className="space-y-4 sm:space-y-6 lg:space-y-8">
-            {/* Founder Image - Optimized for mobile */}
-            <div className="relative rounded-xl sm:rounded-2xl lg:rounded-3xl overflow-hidden shadow-lg sm:shadow-xl lg:shadow-2xl">
-              <div className="relative h-[250px] xs:h-[300px] sm:h-[350px] lg:h-[400px] w-full">
-                <Image
-                  src={founderImage}
-                  alt="Milind P. Rajhans - Founder"
-                  fill
-                  className="object-cover object-center"
-                  sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 50vw, 800px"
-                  priority
-                />
+            {/* Founder Highlight Card */}
+            <div className="relative rounded-xl sm:rounded-2xl lg:rounded-3xl overflow-hidden shadow-lg sm:shadow-xl lg:shadow-2xl bg-gradient-to-br from-[#001a33] to-[#003366] py-8 xs:py-10 sm:py-12 lg:py-16 px-4 text-center">
+              <div className="w-16 h-16 xs:w-20 xs:h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 rounded-full bg-gradient-to-br from-[#f97316] to-[#ea580c] flex items-center justify-center text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-bold text-white mx-auto mb-3 sm:mb-4 lg:mb-5 shadow-lg">
+                M
               </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-              <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 lg:bottom-6 lg:left-6 text-white">
-                <h3 className="text-base sm:text-lg lg:text-2xl font-bold">Milind P. Rajhans</h3>
-                <p className="text-xs sm:text-sm lg:text-base text-white/90">
-                  Founder & Lead Consultant | FI-ACC
-                </p>
-              </div>
+              <h3 className="text-base sm:text-lg lg:text-2xl font-bold text-white">Milind P. Rajhans</h3>
+              <p className="text-xs sm:text-sm lg:text-base text-white/80 mt-1">
+                Founder & Lead Consultant | FI-ACC
+              </p>
             </div>
 
             {/* Stats Grid - Responsive columns */}

@@ -73,7 +73,7 @@ export async function generateMetadata({ params }) {
   
   return {
     title: `Contact ${office.name} - Bhumi Industrial Consultant`,
-    description: `Visit our ${office.name} in ${office.city} for MIDC approvals, project finance, and industrial consulting. Call us at ${office.phone || '+91 90960 99960'}.`,
+    description: `Visit our ${office.name} in ${office.city} for MIDC approvals, project finance, and industrial consulting. Call us at ${office.phone || '+91 98223 72070'}.`,
     alternates: {
       canonical: `${siteSEO.baseUrl}/contact/${resolvedParams.slug}`,
     },
@@ -126,29 +126,39 @@ export default async function ContactLocationPage({ params }) {
   );
 
   // Construct contact methods from office data
+  const officePrimaryPhone = office.phone || contactInfo?.primary_phone || "+91 98223 72070";
+  const officeSecondaryPhone =
+    contactInfo?.secondary_phone && contactInfo.secondary_phone !== officePrimaryPhone
+      ? contactInfo.secondary_phone
+      : null;
+
   const contactMethods = [
     {
       icon: 'Phone',
       title: "Call Us",
-      value: office.phone || contactInfo?.primary_phone || "+91 90960 99960",
+      value: officePrimaryPhone,
       sub: "Primary Contact",
-      href: `tel:${(office.phone || contactInfo?.primary_phone || '+919096099960').replace(/\s+/g, '')}`,
+      href: `tel:${officePrimaryPhone.replace(/\s+/g, '')}`,
       color: "bg-[#f97316]",
     },
-    {
-      icon: 'Phone',
-      title: "Alternate",
-      value: contactInfo?.secondary_phone || "+91 98223 72070",
-      sub: "Secondary Contact",
-      href: `tel:${(contactInfo?.secondary_phone || '+919822372070').replace(/\s+/g, '')}`,
-      color: "bg-[#ea580c]",
-    },
+    ...(officeSecondaryPhone
+      ? [
+          {
+            icon: 'Phone',
+            title: "Alternate",
+            value: officeSecondaryPhone,
+            sub: "Secondary Contact",
+            href: `tel:${officeSecondaryPhone.replace(/\s+/g, '')}`,
+            color: "bg-[#ea580c]",
+          },
+        ]
+      : []),
     {
       icon: 'MessageCircle',
       title: "WhatsApp",
       value: "Chat on WhatsApp",
       sub: "Quick responses",
-      href: `https://wa.me/${(contactInfo?.whatsapp_number || '919096099960').replace(/\s+/g, '')}?text=Hi%20I%20need%20help%20with%20${office.name}`,
+      href: `https://wa.me/${(contactInfo?.whatsapp_number || '919822372070').replace(/\s+/g, '')}?text=Hi%20I%20need%20help%20with%20${office.name}`,
       color: "bg-[#25D366]",
     },
     {
@@ -255,7 +265,11 @@ export default async function ContactLocationPage({ params }) {
                 <p className="text-gray-600 mb-4 sm:mb-6 text-xs sm:text-sm">
                   Fill in your details and we'll connect you with our {office.city} office team.
                 </p>
-                <ContactFormClient defaultLocation={office.city} />
+                <ContactFormClient
+                  defaultLocation={office.city}
+                  primaryPhone={officePrimaryPhone}
+                  secondaryPhone={officeSecondaryPhone}
+                />
               </div>
 
               {/* Right Column - Quick Info */}

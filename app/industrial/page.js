@@ -88,8 +88,11 @@ export default async function IndustrialPage() {
   const contactData = await getContactData();
   
   // Get contact info with fallbacks
-  const primaryPhone = contactData?.primary_phone || "+91 90960 99960";
-  const secondaryPhone = contactData?.secondary_phone || "+91 98223 72070";
+  const primaryPhone = contactData?.primary_phone || "+91 98223 72070";
+  const secondaryPhone =
+    contactData?.secondary_phone && contactData.secondary_phone !== primaryPhone
+      ? contactData.secondary_phone
+      : null;
   const primaryEmail = contactData?.primary_email || "info@bhumiindustrial.com";
 
   const breadcrumb = getBreadcrumbSchema([
@@ -181,13 +184,15 @@ export default async function IndustrialPage() {
                   <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
                   <span className="truncate max-w-[70px] xs:max-w-[90px] sm:max-w-none">{primaryPhone}</span>
                 </a>
-                <a
-                  href={`tel:${secondaryPhone.replace(/\s+/g, '')}`}
-                  className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 lg:px-4 py-2.5 sm:py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg sm:rounded-xl font-bold transition-colors border border-white/20 text-[11px] xs:text-xs sm:text-sm lg:text-base whitespace-nowrap min-h-[44px]"
-                >
-                  <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-                  <span className="truncate max-w-[70px] xs:max-w-[90px] sm:max-w-none">{secondaryPhone}</span>
-                </a>
+                {secondaryPhone && (
+                  <a
+                    href={`tel:${secondaryPhone.replace(/\s+/g, '')}`}
+                    className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 lg:px-4 py-2.5 sm:py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg sm:rounded-xl font-bold transition-colors border border-white/20 text-[11px] xs:text-xs sm:text-sm lg:text-base whitespace-nowrap min-h-[44px]"
+                  >
+                    <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+                    <span className="truncate max-w-[70px] xs:max-w-[90px] sm:max-w-none">{secondaryPhone}</span>
+                  </a>
+                )}
               </div>
             </div>
           </div>
@@ -384,14 +389,18 @@ export default async function IndustrialPage() {
                   <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   <span className="font-bold truncate max-w-[100px] xs:max-w-none">{primaryPhone}</span>
                 </a>
-                <span className="text-gray-300 hidden xs:inline">|</span>
-                <a
-                  href={`tel:${secondaryPhone.replace(/\s+/g, '')}`}
-                  className="flex items-center gap-1.5 sm:gap-2 text-[#f97316] hover:text-[#ea580c] transition-colors text-xs sm:text-sm"
-                >
-                  <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                  <span className="font-bold truncate max-w-[100px] xs:max-w-none">{secondaryPhone}</span>
-                </a>
+                {secondaryPhone && (
+                  <>
+                    <span className="text-gray-300 hidden xs:inline">|</span>
+                    <a
+                      href={`tel:${secondaryPhone.replace(/\s+/g, '')}`}
+                      className="flex items-center gap-1.5 sm:gap-2 text-[#f97316] hover:text-[#ea580c] transition-colors text-xs sm:text-sm"
+                    >
+                      <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                      <span className="font-bold truncate max-w-[100px] xs:max-w-none">{secondaryPhone}</span>
+                    </a>
+                  </>
+                )}
                 <span className="text-gray-300 hidden lg:inline">|</span>
                 <a
                   href={`mailto:${primaryEmail}`}
@@ -429,13 +438,15 @@ export default async function IndustrialPage() {
               
               {/* Secondary phone and enquiry buttons - side by side */}
               <div className="flex flex-row flex-nowrap gap-2 sm:gap-3">
-                <a
-                  href={`tel:${secondaryPhone.replace(/\s+/g, '')}`}
-                  className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 lg:px-4 py-2.5 sm:py-3 lg:py-4 bg-white/20 text-white rounded-lg sm:rounded-xl font-bold hover:bg-white/30 transition-colors border border-white/50 text-[11px] xs:text-xs sm:text-sm lg:text-base whitespace-nowrap min-h-[44px]"
-                >
-                  <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-                  <span className="truncate max-w-[70px] xs:max-w-[90px] sm:max-w-none">{secondaryPhone}</span>
-                </a>
+                {secondaryPhone && (
+                  <a
+                    href={`tel:${secondaryPhone.replace(/\s+/g, '')}`}
+                    className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 lg:px-4 py-2.5 sm:py-3 lg:py-4 bg-white/20 text-white rounded-lg sm:rounded-xl font-bold hover:bg-white/30 transition-colors border border-white/50 text-[11px] xs:text-xs sm:text-sm lg:text-base whitespace-nowrap min-h-[44px]"
+                  >
+                    <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+                    <span className="truncate max-w-[70px] xs:max-w-[90px] sm:max-w-none">{secondaryPhone}</span>
+                  </a>
+                )}
                 <Link
                   href="/contact"
                   className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 lg:px-4 py-2.5 sm:py-3 lg:py-4 border-2 border-white text-white rounded-lg sm:rounded-xl font-bold hover:bg-white/10 transition-colors text-[11px] xs:text-xs sm:text-sm lg:text-base whitespace-nowrap min-h-[44px]"

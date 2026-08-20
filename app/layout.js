@@ -135,10 +135,10 @@ export default function RootLayout({ children }) {
     email: siteSEO.email,
     address: {
       "@type": "PostalAddress",
-      streetAddress: siteSEO.address.split(",")[0],
+      streetAddress: "Flat-B2, Parshuram Apartment, Above Woodland",
       addressLocality: "Nashik",
       addressRegion: "Maharashtra",
-      postalCode: "422005",
+      postalCode: "422101",
       addressCountry: "IN",
     },
     geo: {
@@ -155,15 +155,14 @@ export default function RootLayout({ children }) {
           "Wednesday",
           "Thursday",
           "Friday",
-          "Saturday",
         ],
         opens: "09:00",
-        closes: "19:00",
+        closes: "18:00",
       },
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: "Sunday",
-        opens: "10:00",
+        dayOfWeek: "Saturday",
+        opens: "09:00",
         closes: "14:00",
       },
     ],
@@ -176,9 +175,11 @@ export default function RootLayout({ children }) {
     areaServed: ["Nashik", "Pune", "Chakan", "Ambad", "Satpur", "Sinnar"],
     hasMap: `https://maps.google.com/?q=${encodeURIComponent(siteSEO.address)}`,
     sameAs: [
-      "https://www.linkedin.com/company/bhumi-industrial-consultant",
-      "https://twitter.com/bhumiindustrial",
       "https://www.facebook.com/bhumiindustrial",
+      "https://www.instagram.com/bhumiindustrial",
+      "https://www.linkedin.com/company/bhumi-industrial",
+      "https://youtube.com/@bhumiindustrial",
+      "https://twitter.com/bhumiindustrial",
     ],
   };
 

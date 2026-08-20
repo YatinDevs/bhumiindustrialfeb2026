@@ -9,9 +9,9 @@ export const siteSEO = {
   baseUrl: "https://bhumiindustrial.com",
   defaultImage: "/og-bhumi-nashik.jpg",
   locale: "en_IN",
-  email: "infofiiacc@gmail.com",
-  phone: "+91-9822242170",
-  address: "Office no 301/302, Tulips Apartment, College Road, Nashik-422005",
+  email: "info@bhumiindustrial.com",
+  phone: "+91 98223 72070",
+  address: "Flat-B2, Parshuram Apartment, Above Woodland, College Road, Nashik - 422101",
   foundingYear: "1999",
   founder: "Milind P. Rajhans",
 };
@@ -59,9 +59,9 @@ export const pageSEO = {
   },
   contact: {
     title:
-      "Contact Bhumi Industrial Consultant Nashik | Free MIDC MSME Consultation | 9822242170",
+      "Contact Bhumi Industrial Consultant Nashik | Free MIDC MSME Consultation | 98223 72070",
     description:
-      "Free consultation: MIDC NOC, MSME Udyam, DPR reports, term loans Nashik. Office: Tulips Apartment College Road Nashik. Call +91-9822242170 | infofiiacc@gmail.com",
+      "Free consultation: MIDC NOC, MSME Udyam, DPR reports, term loans Nashik. Office: Parshuram Apartment College Road Nashik. Call +91 98223 72070 | info@bhumiindustrial.com",
     keywords:
       "MIDC consultant contact Nashik, MSME Udyam contact Nashik, project finance phone Nashik, Milind P. Rajhans contact, FI-ACC Nashik phone",
     canonical: "/contact",

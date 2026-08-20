@@ -24,16 +24,16 @@ export default function SeoWrapper({ schemas = [], pageUrl = "/", children }) {
         logo: `${siteSEO.baseUrl}/logo.png`,
         address: {
           "@type": "PostalAddress",
-          streetAddress: "Office no 301/302, 3rd floor, Tulips Apartment",
+          streetAddress: "Flat-B2, Parshuram Apartment, Above Woodland",
           addressLocality: "Nashik",
           addressRegion: "Maharashtra",
-          postalCode: "422005",
+          postalCode: "422101",
           addressCountry: "IN",
         },
         geo: {
           "@type": "GeoCoordinates",
-          latitude: 20.0117,
-          longitude: 73.7862,
+          latitude: 19.9975,
+          longitude: 73.7898,
         },
         openingHoursSpecification: [
           {
@@ -41,6 +41,12 @@ export default function SeoWrapper({ schemas = [], pageUrl = "/", children }) {
             dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
             opens: "09:00",
             closes: "18:00",
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: ["Saturday"],
+            opens: "09:00",
+            closes: "14:00",
           },
         ],
         priceRange: "$$",

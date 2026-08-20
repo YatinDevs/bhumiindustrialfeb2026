@@ -551,7 +551,7 @@ const defaultContent = {
     {
       question: "Is the first consultation free?",
       answer:
-        "Yes, the first consultation is completely free. Call us or visit our office at Flat-B2, Parshuram Apartment, College Road, Nashik to discuss your MIDC requirements.",
+        "Yes, the first consultation is completely free. Call us or visit our office at Flat-B2, Parshuram Apartment, Above Woodland, College Road, Nashik - 422101 to discuss your MIDC requirements.",
     },
   ],
 };
@@ -565,10 +565,13 @@ export default async function IndustrialServicePage({ params }) {
   const contactData = await getContactData();
 
   // Get contact info with fallbacks
-  const primaryPhone = contactData?.primary_phone || "+91 90960 99960";
-  const secondaryPhone = contactData?.secondary_phone || "+91 98223 72070";
+  const primaryPhone = contactData?.primary_phone || "+91 98223 72070";
+  const secondaryPhone =
+    contactData?.secondary_phone && contactData.secondary_phone !== primaryPhone
+      ? contactData.secondary_phone
+      : null;
   const primaryEmail = contactData?.primary_email || "info@bhumiindustrial.com";
-  const whatsappNumber = contactData?.whatsapp_number || "+91 90960 99960";
+  const whatsappNumber = contactData?.whatsapp_number || "+91 98223 72070";
 
   // Try to get service data from API, fallback to static content
   let serviceData;
@@ -688,13 +691,15 @@ export default async function IndustrialServicePage({ params }) {
                     <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
                     <span className="truncate max-w-[70px] xs:max-w-[90px] sm:max-w-none">{primaryPhone}</span>
                   </a>
-                  <a
-                    href={`tel:${secondaryPhone.replace(/\s+/g, '')}`}
-                    className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 lg:px-4 py-2.5 sm:py-3 lg:py-4 bg-white/10 hover:bg-white/20 text-white rounded-lg sm:rounded-xl font-bold transition-colors border border-white/20 text-[11px] xs:text-xs sm:text-sm lg:text-base whitespace-nowrap min-h-[44px]"
-                  >
-                    <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-                    <span className="truncate max-w-[70px] xs:max-w-[90px] sm:max-w-none">{secondaryPhone}</span>
-                  </a>
+                  {secondaryPhone && (
+                    <a
+                      href={`tel:${secondaryPhone.replace(/\s+/g, '')}`}
+                      className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 lg:px-4 py-2.5 sm:py-3 lg:py-4 bg-white/10 hover:bg-white/20 text-white rounded-lg sm:rounded-xl font-bold transition-colors border border-white/20 text-[11px] xs:text-xs sm:text-sm lg:text-base whitespace-nowrap min-h-[44px]"
+                    >
+                      <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+                      <span className="truncate max-w-[70px] xs:max-w-[90px] sm:max-w-none">{secondaryPhone}</span>
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
@@ -797,14 +802,16 @@ export default async function IndustrialServicePage({ params }) {
                         <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-auto group-hover:translate-x-1 transition-transform flex-shrink-0" />
                       </a>
 
-                      <a
-                        href={`tel:${secondaryPhone.replace(/\s+/g, '')}`}
-                        className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-[#f97316]/80 rounded-lg sm:rounded-xl hover:bg-[#ea580c] transition-colors font-bold group text-xs sm:text-sm"
-                      >
-                        <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
-                        <span className="truncate max-w-[100px] xs:max-w-[120px] sm:max-w-none">Alt: {secondaryPhone}</span>
-                        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-auto group-hover:translate-x-1 transition-transform flex-shrink-0" />
-                      </a>
+                      {secondaryPhone && (
+                        <a
+                          href={`tel:${secondaryPhone.replace(/\s+/g, '')}`}
+                          className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-[#f97316]/80 rounded-lg sm:rounded-xl hover:bg-[#ea580c] transition-colors font-bold group text-xs sm:text-sm"
+                        >
+                          <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+                          <span className="truncate max-w-[100px] xs:max-w-[120px] sm:max-w-none">Alt: {secondaryPhone}</span>
+                          <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-auto group-hover:translate-x-1 transition-transform flex-shrink-0" />
+                        </a>
+                      )}
 
                       <a
                         href={`https://wa.me/${whatsappNumber.replace(/\s+/g, '')}?text=Hi%20Milind%20sir%2C%20I%20need%20help%20with%20${encodeURIComponent(seoData.breadcrumb)}`}
@@ -842,13 +849,15 @@ export default async function IndustrialServicePage({ params }) {
                         <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                         <span className="font-medium truncate">{primaryPhone}</span>
                       </a>
-                      <a
-                        href={`tel:${secondaryPhone.replace(/\s+/g, '')}`}
-                        className="flex items-center gap-1.5 sm:gap-2 text-gray-600 hover:text-[#f97316] transition-colors text-xs sm:text-sm"
-                      >
-                        <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                        <span className="font-medium truncate">{secondaryPhone}</span>
-                      </a>
+                      {secondaryPhone && (
+                        <a
+                          href={`tel:${secondaryPhone.replace(/\s+/g, '')}`}
+                          className="flex items-center gap-1.5 sm:gap-2 text-gray-600 hover:text-[#f97316] transition-colors text-xs sm:text-sm"
+                        >
+                          <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                          <span className="font-medium truncate">{secondaryPhone}</span>
+                        </a>
+                      )}
                       <a
                         href={`mailto:${primaryEmail}`}
                         className="flex items-center gap-1.5 sm:gap-2 text-gray-600 hover:text-[#f97316] transition-colors text-xs sm:text-sm"
@@ -974,13 +983,15 @@ export default async function IndustrialServicePage({ params }) {
                   <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
                   <span className="truncate max-w-[60px] xs:max-w-[80px] sm:max-w-none">{primaryPhone}</span>
                 </a>
-                <a
-                  href={`tel:${secondaryPhone.replace(/\s+/g, '')}`}
-                  className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-2 sm:py-2.5 border border-[#f97316] text-[#f97316] rounded-lg sm:rounded-xl font-medium hover:bg-[#f97316] hover:text-white transition-colors text-[11px] xs:text-xs sm:text-sm whitespace-nowrap min-h-[44px]"
-                >
-                  <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-                  <span className="truncate max-w-[60px] xs:max-w-[80px] sm:max-w-none">{secondaryPhone}</span>
-                </a>
+                {secondaryPhone && (
+                  <a
+                    href={`tel:${secondaryPhone.replace(/\s+/g, '')}`}
+                    className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-2 sm:py-2.5 border border-[#f97316] text-[#f97316] rounded-lg sm:rounded-xl font-medium hover:bg-[#f97316] hover:text-white transition-colors text-[11px] xs:text-xs sm:text-sm whitespace-nowrap min-h-[44px]"
+                  >
+                    <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+                    <span className="truncate max-w-[60px] xs:max-w-[80px] sm:max-w-none">{secondaryPhone}</span>
+                  </a>
+                )}
               </div>
             </div>
           </div>
@@ -1014,13 +1025,15 @@ export default async function IndustrialServicePage({ params }) {
                   <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
                   <span className="truncate max-w-[70px] xs:max-w-[90px] sm:max-w-none">{primaryPhone}</span>
                 </a>
-                <a
-                  href={`tel:${secondaryPhone.replace(/\s+/g, '')}`}
-                  className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 lg:px-4 py-2.5 sm:py-3 lg:py-4 bg-white/10 hover:bg-white/20 text-white rounded-lg sm:rounded-xl font-bold transition-colors border border-white/20 text-[11px] xs:text-xs sm:text-sm lg:text-base whitespace-nowrap min-h-[44px]"
-                >
-                  <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-                  <span className="truncate max-w-[70px] xs:max-w-[90px] sm:max-w-none">{secondaryPhone}</span>
-                </a>
+                {secondaryPhone && (
+                  <a
+                    href={`tel:${secondaryPhone.replace(/\s+/g, '')}`}
+                    className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 lg:px-4 py-2.5 sm:py-3 lg:py-4 bg-white/10 hover:bg-white/20 text-white rounded-lg sm:rounded-xl font-bold transition-colors border border-white/20 text-[11px] xs:text-xs sm:text-sm lg:text-base whitespace-nowrap min-h-[44px]"
+                  >
+                    <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+                    <span className="truncate max-w-[70px] xs:max-w-[90px] sm:max-w-none">{secondaryPhone}</span>
+                  </a>
+                )}
               </div>
             </div>
             

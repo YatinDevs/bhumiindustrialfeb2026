@@ -47,18 +47,18 @@ const CTASection = () => {
   };
 
   // Get data from API or use fallbacks
-  const primaryPhone = contactInfo?.primary_phone || "+91 90960 99960";
+  const primaryPhone = contactInfo?.primary_phone || "+91 98223 72070";
   const primaryEmail = contactInfo?.primary_email || "info@bhumiindustrial.com";
-  const whatsappNumber = contactInfo?.whatsapp_number || "+91 90960 99960";
-  
+  const whatsappNumber = contactInfo?.whatsapp_number || "+91 98223 72070";
+
   // Format head office address
-  const headOfficeAddress = headOffice 
+  const headOfficeAddress = headOffice
     ? `${headOffice.address_line_1}, ${headOffice.address_line_2 ? headOffice.address_line_2 + ', ' : ''}${headOffice.city} - ${headOffice.pincode}`
-    : "Office no 301/302, Tulips Apartment, College Road, Nashik-422005";
+    : "Flat-B2, Parshuram Apartment, Above Woodland, College Road, Nashik - 422101";
 
   // Google Maps link
-  const googleMapsLink = headOffice?.google_maps_link || 
-    "https://maps.google.com/?q=Tulips+Apartment+College+Road+Nashik";
+  const googleMapsLink = headOffice?.google_maps_link ||
+    "https://maps.google.com/?q=Flat-B2+Parshuram+Apartment+College+Road+Nashik";
 
   const ctaCards = [
     {

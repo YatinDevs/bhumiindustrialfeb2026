@@ -262,7 +262,6 @@ export default function Navbar() {
         { name: "Our Founder - Milind P. Rajhans", href: "/about#founder" },
         { name: "Our Team", href: "/about#team" },
         { name: "27+ Years of Excellence", href: "/about#milestones" },
-        { name: "Awards & Recognition", href: "/about#awards" },
         { name: "Testimonials", href: "/about#testimonials" },
       ],
     },
@@ -294,8 +293,11 @@ export default function Navbar() {
   };
 
   // Get primary phone from contact info or use fallback
-  const primaryPhone = contactInfo?.primary_phone || "+91 90960 99960";
-  const secondaryPhone = contactInfo?.secondary_phone || "+91 98223 72070";
+  const primaryPhone = contactInfo?.primary_phone || "+91 98223 72070";
+  const secondaryPhone =
+    contactInfo?.secondary_phone && contactInfo.secondary_phone !== primaryPhone
+      ? contactInfo.secondary_phone
+      : null;
   const primaryEmail = contactInfo?.primary_email || "info@bhumiindustrial.com";
   
   // Get unique cities from offices
@@ -357,16 +359,20 @@ export default function Navbar() {
                 <span className="hidden xs:inline">{primaryPhone}</span>
                 <span className="xs:hidden">Call</span>
               </a>
-              <span className="text-white/50 hidden xs:inline">|</span>
-              <a
-                href={`tel:${secondaryPhone.replace(/\s+/g, '')}`}
-                className="hidden xs:flex items-center gap-1.5 hover:text-[#fff7ed] transition-colors"
-              >
-                <Phone size={14} />
-                <span className="hidden sm:inline">{secondaryPhone}</span>
-                <span className="sm:hidden">Alt</span>
-              </a>
-              
+              {secondaryPhone && (
+                <>
+                  <span className="text-white/50 hidden xs:inline">|</span>
+                  <a
+                    href={`tel:${secondaryPhone.replace(/\s+/g, '')}`}
+                    className="hidden xs:flex items-center gap-1.5 hover:text-[#fff7ed] transition-colors"
+                  >
+                    <Phone size={14} />
+                    <span className="hidden sm:inline">{secondaryPhone}</span>
+                    <span className="sm:hidden">Alt</span>
+                  </a>
+                </>
+              )}
+
               {/* Email - Hidden on mobile, visible on md and up */}
               <a
                 href={`mailto:${primaryEmail}`}

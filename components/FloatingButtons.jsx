@@ -56,9 +56,12 @@ function FloatingButtons() {
   };
   
   // Get data from API or use fallbacks
-  const primaryPhone = contactInfo?.primary_phone || "+91 90960 99960";
-  const secondaryPhone = contactInfo?.secondary_phone || "+91 98223 72070";
-  const whatsappNumber = contactInfo?.whatsapp_number || "+919096099960";
+  const primaryPhone = contactInfo?.primary_phone || "+91 98223 72070";
+  const secondaryPhone =
+    contactInfo?.secondary_phone && contactInfo.secondary_phone !== primaryPhone
+      ? contactInfo.secondary_phone
+      : null;
+  const whatsappNumber = contactInfo?.whatsapp_number || "+919822372070";
   const primaryEmail = contactInfo?.primary_email || "info@bhumiindustrial.com";
   
   const facebookUrl = contactInfo?.facebook_url || "https://www.facebook.com/bhumiindustrial";
@@ -138,14 +141,18 @@ function FloatingButtons() {
       bgColor: "bg-[#f97316]",
       description: "24/7 Available",
     },
-    {
-      icon: <FaPhoneAlt size={14} className="sm:w-4 sm:h-4" />,
-      label: "Alternate Contact",
-      number: formatPhoneForDisplay(secondaryPhone),
-      href: `tel:${formatPhoneForTel(secondaryPhone)}`,
-      bgColor: "bg-[#ea580c]",
-      description: "Office Hours",
-    },
+    ...(secondaryPhone
+      ? [
+          {
+            icon: <FaPhoneAlt size={14} className="sm:w-4 sm:h-4" />,
+            label: "Alternate Contact",
+            number: formatPhoneForDisplay(secondaryPhone),
+            href: `tel:${formatPhoneForTel(secondaryPhone)}`,
+            bgColor: "bg-[#ea580c]",
+            description: "Office Hours",
+          },
+        ]
+      : []),
   ];
 
   const buttons = [

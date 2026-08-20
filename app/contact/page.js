@@ -57,30 +57,41 @@ export default async function ContactPage() {
     { name: "Contact", href: "/contact" },
   ]);
 
+  // Only treat the secondary number as real if it's actually distinct from primary
+  const primaryPhone = contactInfo?.primary_phone || "+91 98223 72070";
+  const secondaryPhone =
+    contactInfo?.secondary_phone && contactInfo.secondary_phone !== primaryPhone
+      ? contactInfo.secondary_phone
+      : null;
+
   // Main contact methods with data from backend (with fallbacks)
   const mainContactMethods = [
     {
       icon: Phone,
       title: "Call Us",
-      value: contactInfo?.primary_phone || "+91 90960 99960",
+      value: primaryPhone,
       sub: "Primary Contact",
-      href: `tel:${contactInfo?.primary_phone?.replace(/\s+/g, '') || '+919096099960'}`,
+      href: `tel:${primaryPhone.replace(/\s+/g, '')}`,
       color: "bg-[#f97316]",
     },
-    {
-      icon: Phone,
-      title: "Alternate",
-      value: contactInfo?.secondary_phone || "+91 98223 72070",
-      sub: "Secondary Contact",
-      href: `tel:${contactInfo?.secondary_phone?.replace(/\s+/g, '') || '+919822372070'}`,
-      color: "bg-[#ea580c]",
-    },
+    ...(secondaryPhone
+      ? [
+          {
+            icon: Phone,
+            title: "Alternate",
+            value: secondaryPhone,
+            sub: "Secondary Contact",
+            href: `tel:${secondaryPhone.replace(/\s+/g, '')}`,
+            color: "bg-[#ea580c]",
+          },
+        ]
+      : []),
     {
       icon: MessageCircle,
       title: "WhatsApp",
       value: "Chat on WhatsApp",
       sub: "Quick responses",
-      href: `https://wa.me/${contactInfo?.whatsapp_number?.replace(/\s+/g, '') || '919096099960'}?text=Hi%20I%20need%20industrial%20consulting%20help`,
+      href: `https://wa.me/${contactInfo?.whatsapp_number?.replace(/\s+/g, '') || '919822372070'}?text=Hi%20I%20need%20industrial%20consulting%20help`,
       color: "bg-[#25D366]",
     },
     {
@@ -133,19 +144,21 @@ export default async function ContactPage() {
             {/* Hero CTA Buttons - Always side by side */}
             <div className="flex flex-row flex-nowrap gap-2 sm:gap-3 max-w-[320px] xs:max-w-md sm:max-w-lg">
               <a
-                href={`tel:${contactInfo?.primary_phone?.replace(/\s+/g, '') || '+919096099960'}`}
+                href={`tel:${primaryPhone.replace(/\s+/g, '')}`}
                 className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 lg:px-4 py-2.5 sm:py-3 bg-[#f97316] text-white rounded-lg sm:rounded-xl font-bold hover:bg-[#ea580c] transition-colors text-[11px] xs:text-xs sm:text-sm lg:text-base whitespace-nowrap min-h-[44px]"
               >
                 <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-                <span className="truncate max-w-[70px] xs:max-w-[90px] sm:max-w-none">Primary: {contactInfo?.primary_phone || "+91 90960 99960"}</span>
+                <span className="truncate max-w-[70px] xs:max-w-[90px] sm:max-w-none">{secondaryPhone ? `Primary: ${primaryPhone}` : primaryPhone}</span>
               </a>
-              <a
-                href={`tel:${contactInfo?.secondary_phone?.replace(/\s+/g, '') || '+919822372070'}`}
-                className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 lg:px-4 py-2.5 sm:py-3 bg-white/10 backdrop-blur-sm text-white rounded-lg sm:rounded-xl font-bold hover:bg-white/20 transition-colors border border-white/20 text-[11px] xs:text-xs sm:text-sm lg:text-base whitespace-nowrap min-h-[44px]"
-              >
-                <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-                <span className="truncate max-w-[70px] xs:max-w-[90px] sm:max-w-none">Alt: {contactInfo?.secondary_phone || "+91 98223 72070"}</span>
-              </a>
+              {secondaryPhone && (
+                <a
+                  href={`tel:${secondaryPhone.replace(/\s+/g, '')}`}
+                  className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 lg:px-4 py-2.5 sm:py-3 bg-white/10 backdrop-blur-sm text-white rounded-lg sm:rounded-xl font-bold hover:bg-white/20 transition-colors border border-white/20 text-[11px] xs:text-xs sm:text-sm lg:text-base whitespace-nowrap min-h-[44px]"
+                >
+                  <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+                  <span className="truncate max-w-[70px] xs:max-w-[90px] sm:max-w-none">Alt: {secondaryPhone}</span>
+                </a>
+              )}
             </div>
           </div>
         </section>
@@ -167,7 +180,10 @@ export default async function ContactPage() {
                 <p className="text-gray-600 mb-4 sm:mb-6 text-xs sm:text-sm">
                   Fill in your details and we'll connect you with the right office.
                 </p>
-                <ContactFormClient />
+                <ContactFormClient
+                  primaryPhone={primaryPhone}
+                  secondaryPhone={secondaryPhone}
+                />
               </div>
 
               {/* Right Column - Info Cards */}
@@ -207,19 +223,21 @@ export default async function ContactPage() {
                   {/* Expert card buttons - Always side by side */}
                   <div className="flex flex-row flex-nowrap gap-2 sm:gap-3">
                     <a
-                      href={`tel:${contactInfo?.primary_phone?.replace(/\s+/g, '') || '+919096099960'}`}
+                      href={`tel:${primaryPhone.replace(/\s+/g, '')}`}
                       className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-2 sm:py-2.5 bg-[#f97316] hover:bg-[#ea580c] rounded-lg sm:rounded-xl font-bold transition-colors text-[11px] xs:text-xs sm:text-sm whitespace-nowrap min-h-[44px]"
                     >
                       <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
                       <span className="truncate max-w-[60px] xs:max-w-[80px] sm:max-w-none">Call</span>
                     </a>
-                    <a
-                      href={`tel:${contactInfo?.secondary_phone?.replace(/\s+/g, '') || '+919822372070'}`}
-                      className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-2 sm:py-2.5 bg-[#ea580c] hover:bg-[#dc2626] rounded-lg sm:rounded-xl font-bold transition-colors text-[11px] xs:text-xs sm:text-sm whitespace-nowrap min-h-[44px]"
-                    >
-                      <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-                      <span className="truncate max-w-[60px] xs:max-w-[80px] sm:max-w-none">Alt</span>
-                    </a>
+                    {secondaryPhone && (
+                      <a
+                        href={`tel:${secondaryPhone.replace(/\s+/g, '')}`}
+                        className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-2 sm:py-2.5 bg-[#ea580c] hover:bg-[#dc2626] rounded-lg sm:rounded-xl font-bold transition-colors text-[11px] xs:text-xs sm:text-sm whitespace-nowrap min-h-[44px]"
+                      >
+                        <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+                        <span className="truncate max-w-[60px] xs:max-w-[80px] sm:max-w-none">Alt</span>
+                      </a>
+                    )}
                   </div>
                 </div>
 

@@ -5,7 +5,11 @@ import { Send, CheckCircle, Loader2, AlertCircle } from "lucide-react";
 import axiosInstance from "@/services/api";
 import { servicesList, citiesList } from "@/lib/data";
 
-export default function ContactFormClient({ defaultLocation = "Mumbai" }) {
+export default function ContactFormClient({
+  defaultLocation = "Mumbai",
+  primaryPhone = "+91 98223 72070",
+  secondaryPhone,
+}) {
   const [mounted, setMounted] = useState(false);
 
   const [form, setForm] = useState({
@@ -172,9 +176,13 @@ export default function ContactFormClient({ defaultLocation = "Mumbai" }) {
         <div className="mt-4  ">
           <p className="text-xs text-gray-500">
             For immediate assistance, call us at:{' '}
-            <a href="tel:+919096099960" className="text-[#f97316] font-medium">+91 90960 99960</a>
-            {' / '}
-            <a href="tel:+919822372070" className="text-[#f97316] font-medium">+91 98223 72070</a>
+            <a href={`tel:${primaryPhone.replace(/\s+/g, '')}`} className="text-[#f97316] font-medium">{primaryPhone}</a>
+            {secondaryPhone && secondaryPhone !== primaryPhone && (
+              <>
+                {' / '}
+                <a href={`tel:${secondaryPhone.replace(/\s+/g, '')}`} className="text-[#f97316] font-medium">{secondaryPhone}</a>
+              </>
+            )}
           </p>
         </div>
         <button
@@ -208,7 +216,7 @@ export default function ContactFormClient({ defaultLocation = "Mumbai" }) {
             <p className="font-medium mb-1">Error submitting form:</p>
             <p>{serverError}</p>
             <p className="mt-2 text-xs">
-              Alternatively, call us directly: <a href="tel:+919822242170" className="font-bold underline">+91 9822242170</a>
+              Alternatively, call us directly: <a href={`tel:${primaryPhone.replace(/\s+/g, '')}`} className="font-bold underline">{primaryPhone}</a>
             </p>
           </div>
         </div>

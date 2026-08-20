@@ -1,6 +1,5 @@
 // app/about/page.jsx
 import Link from "next/link";
-import Image from "next/image";
 import {
   Award,
   Users,
@@ -17,7 +16,7 @@ import {
 } from "lucide-react";
 import { buildMetadata, getBreadcrumbSchema } from "@/utils/seoConfig";
 import SeoWrapper from "@/components/SeoWrapper/SeoWrapper";
-import AwardsSection from "@/components/AwardsSection";
+import HashScrollHandler from "@/components/HashScrollHandler";
 import axiosInstance from "@/services/api";
 
 export const revalidate = 3600; // ISR - revalidate every hour
@@ -155,11 +154,12 @@ export default async function AboutPage() {
   const ctaTitle = page?.cta_title || "Ready to Work with Nashik's Best Industrial Consultants?";
   const ctaDescription = page?.cta_description || "Free consultation with Milind P. Rajhans. 27+ years of expertise, 4000+ projects delivered.";
   
-  const primaryPhone = contact?.phone?.primary || "+91 90960 99960";
+  const primaryPhone = contact?.phone?.primary || "+91 98223 72070";
   const primaryEmail = contact?.email?.primary || "info@bhumiindustrial.com";
 
   return (
     <SeoWrapper pageUrl="/about" schemas={[breadcrumb]}>
+      <HashScrollHandler />
       <main>
         {/* ── HERO ───────────────────────────────────────────────── */}
         <section className="relative bg-gradient-to-br from-[#001a33] via-[#002952] to-[#003d66] text-white py-12 sm:py-16 lg:py-20 overflow-hidden">
@@ -308,7 +308,6 @@ export default async function AboutPage() {
         </section>
 
         {/* ── FOUNDER ────────────────────────────────────────────── */}
-                {/* ── FOUNDER ────────────────────────────────────────────── */}
         <section id="founder" className="py-12 sm:py-16 lg:py-20 bg-[#fff7ed] scroll-mt-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-8 sm:mb-10 lg:mb-12">
@@ -319,42 +318,25 @@ export default async function AboutPage() {
                 Meet {page?.founder_name || "Milind P. Rajhans"}
               </h2>
             </div>
-            <div className="max-w-5xl mx-auto bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden">
-              <div className="grid md:grid-cols-2">
-                {/* Founder Image Section - Fixed height to match content */}
-                <div className="relative h-full min-h-[400px] sm:min-h-[450px] lg:min-h-[500px] bg-gradient-to-br from-[#001a33] to-[#003366] overflow-hidden">
-                  {page?.founder_image ? (
-                    <Image
-                      src={`${axiosInstance.defaults.fileURL}/${page.founder_image}`}
-                      alt={page?.founder_name || "Milind P. Rajhans"}
-                      fill
-                      className="object-cover object-center hover:scale-105 transition-transform duration-500"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      priority
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#001a33] to-[#003366]">
-                      <div className="w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 rounded-full bg-[#f97316] flex items-center justify-center text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
-                        M
-                      </div>
-                    </div>
-                  )}
-                  {/* Overlay with name and title */}
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#001a33] to-transparent p-4 sm:p-6 lg:p-8">
-                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-1">
-                      {page?.founder_name || "Milind P. Rajhans"}
-                    </h3>
-                    <p className="text-[#f97316] font-bold text-base sm:text-lg">
-                      {page?.founder_title || "FI-ACC"}
-                    </p>
-                    <p className="text-white/80 text-sm sm:text-base">
-                      {page?.founder_subtitle || "Founder & Lead Consultant"}
-                    </p>
-                  </div>
+            <div className="max-w-3xl mx-auto bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden">
+              {/* Founder Header - Gradient banner with monogram, name & title */}
+              <div className="relative bg-gradient-to-br from-[#001a33] to-[#003366] py-8 sm:py-10 lg:py-12 px-5 sm:px-6 lg:px-8 text-center">
+                <div className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 rounded-full bg-[#f97316] flex items-center justify-center text-3xl sm:text-4xl lg:text-5xl font-bold text-white mx-auto mb-3 sm:mb-4">
+                  M
                 </div>
-                
-                {/* Founder Details Section - Removed fixed height, let it be natural */}
-                <div className="p-5 sm:p-6 lg:p-8 xl:p-10 flex flex-col justify-between h-full">
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-1">
+                  {page?.founder_name || "Milind P. Rajhans"}
+                </h3>
+                <p className="text-[#f97316] font-bold text-base sm:text-lg">
+                  {page?.founder_title || "FI-ACC"}
+                </p>
+                <p className="text-white/80 text-sm sm:text-base">
+                  {page?.founder_subtitle || "Founder & Lead Consultant"}
+                </p>
+              </div>
+
+              {/* Founder Details Section */}
+              <div className="p-5 sm:p-6 lg:p-8 xl:p-10 flex flex-col">
                   <div>
                     <div className="mb-4 sm:mb-5 lg:mb-6">
                       <div className="flex items-center gap-1.5 sm:gap-2 mb-3 sm:mb-4">
@@ -416,9 +398,7 @@ export default async function AboutPage() {
                 </div>
               </div>
             </div>
-          </div>
         </section>
-
         {/* ── TEAM ───────────────────────────────────────────────── */}
         <section id="team" className="py-12 sm:py-16 lg:py-20 bg-white scroll-mt-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -433,19 +413,19 @@ export default async function AboutPage() {
                 {page?.team_description || "A dedicated team of industrial and financial experts committed to your project's success"}
               </p>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-6">
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-4 lg:gap-6">
               {teamMembers.map((member, i) => (
                 <div
                   key={i}
-                  className="group bg-gradient-to-br from-white to-[#fff7ed] p-3 sm:p-4 lg:p-6 rounded-lg sm:rounded-xl lg:rounded-2xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 text-center border border-[#ffedd5]/50"
+                  className="group shrink-0 w-[calc(50%-6px)] sm:w-[calc(50%-8px)] md:w-[calc(33.333%-10.667px)] lg:w-[calc(20%-19.2px)] h-36 sm:h-40 lg:h-48 xl:h-52 flex flex-col items-center justify-center bg-gradient-to-br from-white to-[#fff7ed] p-3 sm:p-4 lg:p-6 rounded-lg sm:rounded-xl lg:rounded-2xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 text-center border border-[#ffedd5]/50"
                 >
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 xl:w-20 xl:h-20 rounded-full bg-gradient-to-br from-[#f97316] to-[#ea580c] flex items-center justify-center text-white text-base sm:text-lg lg:text-xl xl:text-2xl font-bold mx-auto mb-2 sm:mb-3 lg:mb-4 group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 xl:w-20 xl:h-20 rounded-full bg-gradient-to-br from-[#f97316] to-[#ea580c] flex items-center justify-center text-white text-base sm:text-lg lg:text-xl xl:text-2xl font-bold mx-auto mb-2 sm:mb-3 lg:mb-4 group-hover:scale-110 transition-transform shrink-0">
                     {member.initial}
                   </div>
-                  <h3 className="font-bold text-gray-900 text-xs sm:text-sm lg:text-base xl:text-lg mb-0.5 sm:mb-1 truncate">
+                  <h3 className="w-full font-bold text-gray-900 text-xs sm:text-sm lg:text-base xl:text-lg mb-0.5 sm:mb-1 truncate">
                     {member.name}
                   </h3>
-                  <p className="text-[#f97316] font-semibold text-[10px] sm:text-xs lg:text-sm">
+                  <p className="w-full text-[#f97316] font-semibold text-[10px] sm:text-xs lg:text-sm truncate">
                     {member.role}
                   </p>
                 </div>
@@ -492,9 +472,6 @@ export default async function AboutPage() {
             </div>
           </div>
         </section>
-
-        {/* ── AWARDS ──────────────────────────────────────────────── */}
-        <AwardsSection />
 
         {/* ── TESTIMONIALS ───────────────────────────────────────── */}
         <section id="testimonials" className="py-12 sm:py-16 lg:py-20 bg-white scroll-mt-20">
